@@ -9,16 +9,40 @@ import java.util.Objects;
  * @authors Ofir Shmueli and Yehuda Kahan
  */
 public class Vector {
-    private Point3D _head;
+    /**
+     * לשאול למה לא final
+     */
+    Point3D _head;
+
+    public Vector(Coordinate x, Coordinate y, Coordinate z){
+        if(x._coord==0 && y._coord==0 && z._coord==0){
+            throw new IllegalArgumentException("The vector cannot be the Zero vector");
+        }
+        _head._x=x;
+        _head._y=y;
+        _head._z=z;
+    }
+
+    public Vector(double x, double y, double z){
+        if(x==0 && y==0 && z==0){
+            throw new IllegalArgumentException("The vector cannot be the Zero vector");
+        }
+        _head._x=new Coordinate(x);
+        _head._y=new Coordinate(y);
+        _head._z=new Coordinate(z);
+    }
 
     /**
      * constructor that gets point and sets _head with that point
      * @param point
      */
     public Vector(Point3D point){
-        if(point.get_x()==(0,0,0)){
 
-        }
+          if(point.equals(Point3D.ZERO)){
+              throw new IllegalArgumentException("The vector cannot be the Zero vector");
+                 }
+
+
         _head=point;
     }
 

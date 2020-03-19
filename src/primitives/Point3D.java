@@ -6,9 +6,10 @@ import java.util.Objects;
  * presenting a point in 3D that contains 3 coordinates
  */
 public class Point3D {
-    private Coordinate _x;
-    private Coordinate _y;
-    private Coordinate _z;
+    Coordinate _x;
+    Coordinate _y;
+    Coordinate _z;
+    static final Point3D ZERO = (new Point3D(new Coordinate(0), new Coordinate(0),new Coordinate(0)));
 
 
     /**
@@ -21,6 +22,19 @@ public class Point3D {
         _x=x;
         _y=y;
         _z=z;
+    }
+
+    /**
+     * לשאול את המרצה
+     *
+     * @param x
+     * @param y
+     * @param z
+     */
+    public Point3D(double x, double y, double z){
+        _x=new Coordinate(x);
+        _y=new Coordinate(y);
+        _z=new Coordinate(z);
     }
 
     /**
@@ -57,6 +71,19 @@ public class Point3D {
         return _z;
     }
 
+    /**
+     * Vector subtractions which gets a point and subtracts from it our original point in order to get a vector
+     * @param point
+     * @return the new vector created from the points
+     */
+    public Vector subtract(Point3D point){
+        return new Vector(point._x._coord - _x._coord, point._y._coord - _y._coord, point._z._coord - _z._coord );
+    }
+
+    public Point3D add(Vector vector){
+        return new Point3D(_x._coord + vector._head._x._coord, _y._coord + vector._head._y._coord, _z._coord + vector._head._z._coord);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,5 +94,11 @@ public class Point3D {
                 && point3D._z.equals(_z);
     }
 
+    @Override
+    public String toString() {
+        return _x.toString() + " " +
+                _y.toString() + " " +
+                 _z.toString();
 
+    }
 }
