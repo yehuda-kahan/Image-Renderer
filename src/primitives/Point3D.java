@@ -6,10 +6,10 @@ import java.util.Objects;
  * presenting a point in 3D that contains 3 coordinates
  */
 public class Point3D {
-    Coordinate _x;
-    Coordinate _y;
-    Coordinate _z;
-    static final Point3D ZERO = (new Point3D(new Coordinate(0), new Coordinate(0),new Coordinate(0)));
+    final Coordinate _x;
+    final Coordinate _y;
+    final Coordinate _z;
+    static final Point3D ZERO = new Point3D(new Coordinate(0), new Coordinate(0),new Coordinate(0));
 
 
     /**
@@ -19,9 +19,9 @@ public class Point3D {
      * @param z
      */
     public Point3D(Coordinate x, Coordinate y, Coordinate z){
-        _x=x;
-        _y=y;
-        _z=z;
+        _x =new Coordinate(x);
+        _y = new Coordinate(y);
+        _z = new Coordinate(z);
     }
 
     /**
@@ -32,9 +32,9 @@ public class Point3D {
      * @param z
      */
     public Point3D(double x, double y, double z){
-        _x=new Coordinate(x);
-        _y=new Coordinate(y);
-        _z=new Coordinate(z);
+        _x = new Coordinate(x);
+        _y = new Coordinate(y);
+        _z = new Coordinate(z);
     }
 
     /**
@@ -42,9 +42,9 @@ public class Point3D {
      * @param other coordinate
      */
     public Point3D(Point3D other){
-        _x=other._x;
-        _y=other._y;
-        _z=other._z;
+        _x = new Coordinate(other._x.getCoord());
+        _y = new Coordinate(other._y.getCoord());
+        _z = new Coordinate(other._z.getCoord());
     }
 
     /**
