@@ -4,12 +4,14 @@ import java.lang.Math;
 
 /**
  * presenting a point in 3D that contains 3 coordinates
+ * @author Ofir Shmueli, Yehuda Kahan
  */
 public class Point3D {
+
     final Coordinate _x;
     final Coordinate _y;
     final Coordinate _z;
-    static final Point3D ZERO = new Point3D(new Coordinate(0), new Coordinate(0),new Coordinate(0));
+    public static final Point3D ZERO = new Point3D(0,0,0);
 
 
     /**
@@ -25,7 +27,6 @@ public class Point3D {
     }
 
     /**
-     * לשאול את המרצה
      *
      * @param x
      * @param y
