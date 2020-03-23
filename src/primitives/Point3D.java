@@ -1,6 +1,6 @@
 package primitives;
 
-import java.util.Objects;
+import java.lang.Math;
 
 /**
  * presenting a point in 3D that contains 3 coordinates
@@ -80,8 +80,33 @@ public class Point3D {
         return new Vector(point._x._coord - _x._coord, point._y._coord - _y._coord, point._z._coord - _z._coord );
     }
 
+    /**
+     * add the given vector to the current point and return a new point
+     * @param vector
+     * @return point3D
+     */
     public Point3D add(Vector vector){
         return new Point3D(_x._coord + vector._head._x._coord, _y._coord + vector._head._y._coord, _z._coord + vector._head._z._coord);
+    }
+
+    /**
+     * calculate the squared distance between the given point to the current point
+     * @param point
+     * @return distance Squared
+     */
+    public double distanceSquared(Point3D point){
+        return (point._x._coord - _x._coord)*(point._x._coord - _x._coord) +
+                (point._y._coord - _y._coord)*(point._y._coord - _y._coord)+
+                (point._z._coord - _z._coord)*(point._z._coord - _z._coord);
+    }
+
+    /**
+     * calculate the distance between the given point to the current point
+     * @param point
+     * @return distance between two points
+     */
+    public double distance(Point3D point){
+        return Math.sqrt(distanceSquared(point));
     }
 
     @Override
@@ -96,7 +121,7 @@ public class Point3D {
 
     @Override
     public String toString() {
-        return _x.toString() + " " +
+        return "Point3D :" + _x.toString() + " " +
                 _y.toString() + " " +
                  _z.toString();
 

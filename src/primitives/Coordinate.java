@@ -9,11 +9,11 @@ import static primitives.Util.*;
  * @author Dan Zilberstein
  */
 public final class Coordinate {
-    /**
-     * Coordinate value, intentionally "package-friendly" due to performance
-     * constraints
-     */
-    final double _coord;
+        /**
+         * Coordinate value, intentionally "package-friendly" due to performance
+         * constraints
+         */
+        final double _coord;
 
     /**
      * Coordinate constructor receiving a coordinate value

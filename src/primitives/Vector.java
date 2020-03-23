@@ -1,9 +1,6 @@
 package primitives;
 
 
-import java.awt.*;
-import java.util.Objects;
-
 /**
  * presenting a vector that begins in the (0,0,0) and ends in the head, which we get
  * @authors Ofir Shmueli and Yehuda Kahan
@@ -55,6 +52,42 @@ public class Vector {
         return _head;
     }
 
+    public Vector subtract(Vector vector){
+        return new Vector(vector._head._x._coord - _head._x._coord,
+                vector._head._y._coord - _head._y._coord,
+                vector._head._z._coord - _head._z._coord);
+    }
+
+    public Vector add(Vector vector){
+        return new Vector(vector._head._x._coord + _head._x._coord,
+                vector._head._y._coord + _head._y._coord,
+                vector._head._z._coord + _head._z._coord);
+    }
+
+    public Vector scale(double number){
+        return new Vector(number*_head._x._coord,number*_head._y._coord,number*_head._z._coord);
+    }
+
+    public double dotProduct(Vector vector){
+        return _head._x._coord*vector._head._x._coord +
+                _head._y._coord*vector._head._y._coord +
+                _head._z._coord*vector._head._z._coord;
+    }
+
+    public Vector crossProduct(Vector vector){
+        return new Vector(_head._y._coord*vector._head._z._coord - _head._z._coord*vector._head._y._coord,
+                _head._z._coord*vector._head._x._coord - _head._x._coord*vector._head._z._coord,
+                _head._x._coord*vector._head._y._coord - _head._y._coord*vector._head._x._coord);
+    }
+
+    public double lengthSquared(){
+        return Point3D.ZERO.distanceSquared(_head);
+    }
+
+    public double length(){
+        return Math.sqrt(Point3D.ZERO.distanceSquared(_head));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,4 +96,8 @@ public class Vector {
         return _head.equals(vector._head);
     }
 
+    @Override
+    public String toString() {
+        return "Vector :" + _head.toString();
+    }
 }
