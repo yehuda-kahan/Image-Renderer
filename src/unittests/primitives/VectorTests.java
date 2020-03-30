@@ -1,7 +1,9 @@
-package unittests.primitives;
+package primitives;
 
 import org.junit.Test;
 import java.util.*;
+
+import primitives.Point3D;
 import primitives.Vector;
 
 import static java.lang.System.out;
@@ -14,24 +16,20 @@ import static primitives.Util.isZero;
  */
 public class VectorTests {
 
-
     Vector v1 = new Vector(1, 2, 3);
     Vector v2 = new Vector(-2, -4, -6);
     Vector v3 = new Vector(0, 3, -2);
-
-    /**
-     * Test method for {@link Vector#Vector}
-     */
-    @Test
-    public void testConstructor(){
-
-    }
 
     /**
      * Test method for {@link primitives.Vector#subtract(Vector)}
      */
     @Test
     public void subtract() {
+
+        // ============ Equivalence Partitions Tests ==============
+
+        // Test ordinary subtract from two vectors
+        assertEquals("ERROR: subtracting v3 from v2 is not equal to the returned value",new Vector(2,7,4), v2.subtract(v3));
     }
 
     /**
@@ -39,6 +37,11 @@ public class VectorTests {
      */
     @Test
     public void add() {
+
+        // ============ Equivalence Partitions Tests ==============
+
+        // Test ordinary addition vector with vector
+        assertEquals("ERROR: adding v3 to v2 is not equal to the returned value",new Vector(-2,-1,-8), v2.add(v3));
     }
 
     /**
@@ -46,6 +49,24 @@ public class VectorTests {
      */
     @Test
     public void scale() {
+
+        int alfa = 2,beta = -1 ,zero = 0;
+
+        // ============ Equivalence Partitions Tests ==============
+
+        // Test scale with positive number
+        assertEquals("ERROR: multiplying vector v1 with scalar alfa is different from the returned value",new Vector(2,4,6), v1.scale(alfa));
+        // Test scale with negative number
+        assertEquals(new Vector(-1,-2,-3), v1.scale(beta));
+
+        // =============== Boundary Values Tests ==================
+
+        // Test scale with zero number
+        try {
+            assertEquals(new Vector(0,0,0), v1.scale(zero));
+            fail("ERROR: should throw an exception");
+        }
+        catch (IllegalArgumentException ex){}
     }
 
     /**
@@ -110,6 +131,7 @@ public class VectorTests {
 
         // ============ Equivalence Partitions Tests ==============
 
+        //  Test that length of v1 is proper
         assertEquals("ERROR: length() wrong value",0,v1.length() - 5,0.00001);
 
     }
@@ -120,6 +142,22 @@ public class VectorTests {
     @Test
     public void normalize() {
 
+        // ============ Equivalence Partitions Tests ==============
+
+        // Test ordinary normalization
+        Vector v1 = new Vector(3.5, -5, 10);
+        v1.normalize();
+        assertEquals(1, v1.length(), 1e-10);
+
+        try {
+            Vector v2 = new Vector(0, 0, 0);
+            v2.normalize();
+            fail("ERROR: Didn't throw divide by zero exception!");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("ERROR: The vector cannot be the Zero vector", ex.getMessage());
+        }
+        assertTrue(true);
+
     }
 
     /**
@@ -127,5 +165,11 @@ public class VectorTests {
      */
     @Test
     public void normalized() {
+
+        // ============ Equivalence Partitions Tests ==============
+
+        Vector v1 = new Vector(2,3,-5);
+        Vector v2 = v1.normalized();
+        assertEquals("ERROR: normalize of vector v2 is different from the returned value",1, v2.length(), 1e-10);
     }
 }

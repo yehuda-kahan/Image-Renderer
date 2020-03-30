@@ -72,9 +72,11 @@ public class Vector {
      * @return vector which subtracts the head vector from the given vector
      */
     public Vector subtract(Vector vector){
-        return new Vector(vector._head._x._coord - _head._x._coord,
-                vector._head._y._coord - _head._y._coord,
-                vector._head._z._coord - _head._z._coord);
+
+        return new Point3D(_head).subtract(vector._head);
+//        return new Vector(vector._head._x._coord - _head._x._coord,
+//                vector._head._y._coord - _head._y._coord,
+//                vector._head._z._coord - _head._z._coord);
     }
 
 
@@ -84,9 +86,11 @@ public class Vector {
      * @return vector combined from the two vectors
      */
     public Vector add(Vector vector){
-        return new Vector(vector._head._x._coord + _head._x._coord,
-                vector._head._y._coord + _head._y._coord,
-                vector._head._z._coord + _head._z._coord);
+
+        return new Vector(new Point3D(_head).add(vector));
+//        return new Vector(vector._head._x._coord + _head._x._coord,
+//                vector._head._y._coord + _head._y._coord,
+//                vector._head._z._coord + _head._z._coord);
     }
 
 

@@ -87,7 +87,9 @@ public class Point3D {
      * @return point3D
      */
     public Point3D add(Vector vector){
-        return new Point3D(_x._coord + vector._head._x._coord, _y._coord + vector._head._y._coord, _z._coord + vector._head._z._coord);
+        return new Point3D(_x._coord + vector._head._x._coord,
+                _y._coord + vector._head._y._coord,
+                _z._coord + vector._head._z._coord);
     }
 
     /**
