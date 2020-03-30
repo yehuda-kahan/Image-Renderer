@@ -1,6 +1,7 @@
-package geometries;
+package unittests.geometries;
 
 import org.junit.Test;
+import geometries.Plane;
 import primitives.Point3D;
 
 import static org.junit.Assert.*;
