@@ -33,9 +33,7 @@ public class Ray {
      * getter
      * @return _POO
      */
-    public Point3D get_POO() {
-        return _POO;
-    }
+    public Point3D get_POO() { return _POO;}
 
     /**
      * getter

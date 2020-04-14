@@ -122,7 +122,7 @@ public class Point3D {
                 && point3D._z.equals(_z);
     }
 
-    
+
     @Override
     public String toString() {
         return "Point3D : (" + _x.toString() + " , " +

@@ -37,10 +37,18 @@ public class Cylinder extends Tube {
     @Override
     public Vector getNormal(Point3D point) {
 
-        if (point.get_z().getCoord() == _height)
+        // create a new plane that present the bottom of the cylinder
+        Plane bottom = new Plane(_axisRay.get_POO(),_axisRay.get_direction());
+
+        // create a new plane that present the top of the cylinder
+        Point3D P00Top = _axisRay.get_POO().add(_axisRay.get_direction().scale(_height));
+        Plane top = new Plane(P00Top, new Vector(_axisRay.get_direction().scale(-1)));
+
+        if (top.IsOnThePlane(point))
             return  new Vector(_axisRay.get_direction());
-        if (point.get_z().getCoord() == _axisRay.get_POO().get_z().getCoord())
+        if (bottom.IsOnThePlane(point))
             return new Vector(_axisRay.get_direction().scale(-1));
+        // if the point is on the scope
         return super.getNormal(point);
     }
 }

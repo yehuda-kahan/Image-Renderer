@@ -27,4 +27,17 @@ public class PlaneTests {
         assertEquals(new Vector(2,-1,0).normalize(), plane.getNormal(new Point3D(0,1,1)));
 
     }
+
+    /**
+     * Test method for {@link Plane#IsOnThePlane(Point3D)}
+     */
+    @Test
+    public void IsOnThePlane(){
+
+        // ============ Equivalence Partitions Tests ==============
+
+        Plane plane = new Plane(new Point3D(1,0,0),new Vector(2,1,3));
+
+        assertTrue(plane.IsOnThePlane(new Point3D(1,-2,4/6d)));
+    }
 }

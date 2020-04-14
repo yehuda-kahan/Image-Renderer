@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import static primitives.Util.isZero;
+
 /**
  * presenting a plane by a point and normal
  * @author Ofir Shmueli, Yehuda Kahan
@@ -53,6 +55,21 @@ public class Plane implements Geometry {
      */
     public Vector get_normal() {
         return _normal;
+    }
+
+    /**
+     * checks if the given point is on the current plane
+     * @param point the given point
+     * @return true if is on the plane, and false otherwise
+     */
+    public boolean IsOnThePlane(Point3D point){
+
+        // left side of the equation
+        double leftSide = _normal.dotProduct(new Vector(point));
+        // right side of the equation
+        double rightSide = _normal.dotProduct(new Vector(_p));
+
+        return isZero(rightSide - leftSide);
     }
 
     @Override
