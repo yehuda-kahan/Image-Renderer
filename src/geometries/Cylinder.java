@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.List;
+
 /**
  * presenting cylinder
  * @author Ofir Shmueli, Yehuda Kahan
@@ -50,5 +52,10 @@ public class Cylinder extends Tube {
             return new Vector(_axisRay.get_direction().scale(-1));
         // if the point is on the scope
         return super.getNormal(point);
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }

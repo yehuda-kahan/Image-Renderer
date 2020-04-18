@@ -52,9 +52,7 @@ public class Point3D {
      * gets the _x param
      * @return _x
      */
-    public Coordinate get_x() {
-        return _x;
-    }
+    public Coordinate get_x() {   return _x;    }
 
     /**
      * gets the _y param

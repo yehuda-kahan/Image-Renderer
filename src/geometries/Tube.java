@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.List;
+
 /**
  * presenting a tube
  * @author Ofir Shmueli, Yehuda Kahan
@@ -47,5 +49,10 @@ public class Tube extends RadialGeometry {
 
         Point3D O = _axisRay.get_POO().add(_axisRay.get_direction().scale(t));
         return new Vector(O.subtract(point)).normalize();
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }

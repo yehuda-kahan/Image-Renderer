@@ -1,7 +1,10 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * presenting a sphere
@@ -36,5 +39,10 @@ public class Sphere extends RadialGeometry {
     @Override
     public Vector getNormal(Point3D point) {
         return new Vector(new Point3D(_center).subtract(point)).normalize();
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }

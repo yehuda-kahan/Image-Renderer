@@ -3,6 +3,7 @@ package geometries;
 import primitives.*;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * presenting a triangle
@@ -23,5 +24,10 @@ public class Triangle extends Polygon {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }
