@@ -81,7 +81,7 @@ public class SphereTest {
 
         // **** Group: Ray's line goes through the center
         // TC13: Ray starts before the sphere (2 points)
-        
+
         // TC14: Ray starts at sphere and goes inside (1 points)
         // TC15: Ray starts inside (1 points)
         // TC16: Ray starts at the center (1 points)
