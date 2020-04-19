@@ -45,6 +45,15 @@ public class Sphere extends RadialGeometry {
     @Override
     public List<Point3D> findIntersections(Ray ray) {
 
-        return null;
+
+
+
+
+        // Ray start at the center of the sphere
+        if(ray.get_POO() == _center)
+        {
+            Point3D p = new Point3D(_center).add(ray.get_direction().scale(_radius));
+            return List.of(p);
+        }
     }
 }
