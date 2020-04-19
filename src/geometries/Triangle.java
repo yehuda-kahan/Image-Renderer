@@ -12,7 +12,7 @@ import java.util.List;
 public class Triangle extends Polygon {
 
     /**
-     * constructor that gets 3 points and sets to local fields
+     * constructor that gets 3 points and sets local fields
      * @param p1
      * @param p2
      * @param p3
