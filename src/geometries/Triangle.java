@@ -36,8 +36,10 @@ public class Triangle extends Polygon {
 
         List<Vector> vectors = new ArrayList<>(3);
         for (int i = 0; i < 3; ++i) {
-            vectors.add(new Vector(ray.get_POO()).subtract())
+            vectors.add(new Vector(ray.get_POO()).subtract(new Vector(_vertices.get(i))));
         }
+
+
 
 
     }
