@@ -81,11 +81,6 @@ public class Plane implements Geometry {
                 ", _normal=" + _normal;
     }
 
-    /**
-     *
-     * @param point
-     * @return
-     */
     @Override
     public Vector getNormal(Point3D point) {
         return _normal;
