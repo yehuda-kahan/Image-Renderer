@@ -93,7 +93,7 @@ public class SphereTest {
         // TC14: Ray starts at sphere and goes inside (1 points)
         p1 = new Point3D(2, 0, 0);
         result = sphere.findIntersections(new Ray(new Point3D(0,0,0),new Vector(1,0,0)));
-        assertEquals("Ray starts at sphere and goes inside (accros the center)", List.of(p1),result);
+        assertEquals("Ray starts at sphere and goes inside (across the center)", List.of(p1),result);
 
         // TC15: Ray starts inside (1 points)
         p1 = new Point3D(2, 0, 0);
@@ -130,5 +130,11 @@ public class SphereTest {
         // TC19: Ray's line is outside, ray is orthogonal to ray start to sphere's center line
         assertEquals("Ray is orthogonal to the center", null
                 ,sphere.findIntersections(new Ray(new Point3D(1,2,0),new Vector(1,0,0))));
+
+        // TC20: Ray is orthogonal to center minus P00 (ray's line is inside)
+        p1=new Point3D(0.5, 0, 0.8660254037844);
+        result = sphere.findIntersections(new Ray(new Point3D(0.5,0,0), new Vector(0,0,1)));
+        assertEquals("Ray is orthogonal to center minus P00", List.of(p1), result);
+
     }
 }

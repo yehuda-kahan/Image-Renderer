@@ -51,11 +51,34 @@ public class Sphere extends RadialGeometry {
             Point3D p = new Point3D(_center).add(ray.get_direction().scale(_radius));
             return List.of(p);
         }
-
-
-
-
-
+        Vector u = ray.get_POO().subtract(_center);
+        double tm = alignZero(u.dotProduct(ray.get_direction()));
+        double d = alignZero(Math.sqrt(u.lengthSquared()-(tm*tm)));
+        if(d>=_radius)
+            return null;
+        double th = alignZero(Math.sqrt((_radius*_radius)-(d*d)));
+        double t1 = alignZero(tm+th);
+        double t2 = alignZero(tm-th);
+        if(t1>0 && t2>0)
+        {
+            Point3D p1 = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t1));
+            Point3D p2 = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t2));
+            return List.of(p1,p2);
+        }
+        if(t1<=0 && t2<=0)
+        {
+            return null;
+        }
+        if(t1>0 && t2<=0)
+        {
+            Point3D p1 = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t1));
+            return List.of(p1);
+        }
+        if(t1<=0 && t2>0)
+        {
+            Point3D p2 = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t2));
+            return List.of(p2);
+        }
         return null;
     }
 }
