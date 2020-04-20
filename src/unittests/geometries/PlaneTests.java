@@ -98,5 +98,12 @@ public class PlaneTests {
         assertEquals("Ray start at the same point which appears as reference point in the plane",null
         , plane.findIntersections(new Ray(new Point3D(1,0,0), new Vector(1,1,2))));
 
+        //T10 : Ray insert with the point which appears as reference point in the plane
+        p = new Point3D(1,0,0);
+        result = plane.findIntersections(new Ray(new Point3D(2,1,1), new Vector(-1,-1,-1)));
+        assertEquals("Ray start at the same point which appears as reference point in the plane",List.of(p)
+                , result);
+
+
     }
 }

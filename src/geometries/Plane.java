@@ -4,6 +4,7 @@ import primitives.*;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -92,6 +93,22 @@ public class Plane implements Geometry {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
+
+        if (ray.get_POO().equals(_p)) // Ray start at the point that present the plane
+            return null;
+
+        double nv = ray.get_direction().dotProduct(_normal);
+
+        if (isZero(nv)) // Ray is parallel to the plane
+            return null;
+
+        double nQMinusP0 = _normal.dotProduct(ray.get_POO().subtract(_p));
+        double t = alignZero(nQMinusP0/nv);
+
+        if (t > 0) {
+            Point3D p = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t));
+            return List.of(p);
+        }
         return null;
     }
 }

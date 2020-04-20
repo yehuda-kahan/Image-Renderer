@@ -1,8 +1,10 @@
 package geometries;
 
 import primitives.*;
+import primitives.Vector;
 
 import java.awt.*;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -28,6 +30,15 @@ public class Triangle extends Polygon {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        return null;
+
+        if (_plane.findIntersections(ray) == null) // Ray dosen't intersect with the triangle
+            return null;
+
+        List<Vector> vectors = new ArrayList<>(3);
+        for (int i = 0; i < 3; ++i) {
+            vectors.add(new Vector(ray.get_POO()).subtract())
+        }
+
+
     }
 }
