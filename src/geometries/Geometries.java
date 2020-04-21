@@ -10,9 +10,13 @@ public class Geometries implements Intersectable {
 
     private List<Intersectable> _geometries;
 
+    /**
+     * Default constructor
+     */
     public Geometries(){
         _geometries = new ArrayList<>();
     }
+
 
     public Geometries(Intersectable... geometries){
         _geometries = List.of(geometries);
@@ -20,7 +24,7 @@ public class Geometries implements Intersectable {
 
     /**
      * add a collection to the existing collection
-     * @param geometries The new collection added
+     * @param geometries The new added collection
      */
     public void add(Intersectable... geometries){
         _geometries.addAll(List.of(geometries));
