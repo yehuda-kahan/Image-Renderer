@@ -101,7 +101,7 @@ public class Plane implements Geometry {
         double t = alignZero(nQMinusP0/nv);
 
         if (t > 0) {
-            Point3D p = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t));
+            Point3D p = new Point3D(ray.getPoint(t));
             return List.of(p);
         }
         return null;

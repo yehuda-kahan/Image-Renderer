@@ -43,6 +43,10 @@ public class Ray {
         return _direction;
     }
 
+    public Point3D getPoint(double t){
+       return _POO.add(_direction.scale(t));
+    }
+
     @Override
     public String toString() {
         return "_POO : " +  _POO.toString() +" _direction : " + _direction.toString();

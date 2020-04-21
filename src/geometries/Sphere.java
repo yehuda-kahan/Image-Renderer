@@ -48,7 +48,7 @@ public class Sphere extends RadialGeometry {
         // Ray start at the center of the sphere
         if(ray.get_POO().equals(_center))
         {
-            Point3D p = new Point3D(_center).add(ray.get_direction().scale(_radius));
+            Point3D p = new Point3D(ray.getPoint(_radius));
             return List.of(p);
         }
         Vector u = ray.get_POO().subtract(_center);
@@ -61,8 +61,8 @@ public class Sphere extends RadialGeometry {
         double t2 = alignZero(tm-th);
         if(t1>0 && t2>0)
         {
-            Point3D p1 = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t1));
-            Point3D p2 = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t2));
+            Point3D p1 = new Point3D(ray.getPoint(t1));
+            Point3D p2 = new Point3D(ray.getPoint(t2));
             return List.of(p1,p2);
         }
         if(t1<=0 && t2<=0)
@@ -71,12 +71,12 @@ public class Sphere extends RadialGeometry {
         }
         if(t1>0 && t2<=0)
         {
-            Point3D p1 = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t1));
+            Point3D p1 = new Point3D(ray.getPoint(t1));
             return List.of(p1);
         }
         if(t1<=0 && t2>0)
         {
-            Point3D p2 = new Point3D(ray.get_POO()).add(ray.get_direction().scale(t2));
+            Point3D p2 = new Point3D(ray.getPoint(t2));
             return List.of(p2);
         }
         return null;
