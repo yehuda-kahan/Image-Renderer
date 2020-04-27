@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.ArrayList;
 import java.util.List;
 import primitives.*;
 import static primitives.Util.*;
@@ -87,6 +88,33 @@ public class Polygon implements Geometry {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        return null;
+
+        if (_plane.findIntersections(ray) == null) // Ray doesn't intersect with the triangle
+            return null;
+
+        List<Vector> vectors = new ArrayList<>();
+        for (int i = 0; i < _vertices.size(); ++i) {
+            vectors.add(new Vector(ray.get_POO()).subtract(new Vector(_vertices.get(i))));
+        }
+
+        List<Vector> normals = new ArrayList<>();
+        for (int i = 0 ; i < _vertices.size() - 1; ++i) {
+            normals.add(vectors.get(i).crossProduct(vectors.get(i+1)));
+        }
+        normals.add(vectors.get(_vertices.size() - 1).crossProduct(vectors.get(0)));
+
+        int plus = 0, minus = 0;
+        for (int i = 0; i < _vertices.size(); ++i){
+            double t = alignZero(normals.get(i).dotProduct(ray.get_direction()));
+            if (isZero(t))
+                return null;
+            if(t > 0)
+                plus++;
+            else
+                minus++;
+        }
+        if (plus != _vertices.size() && minus != _vertices.size())
+            return null;
+        return _plane.findIntersections(ray);
     }
 }

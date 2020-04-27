@@ -9,6 +9,7 @@ public class CameraIntegrationTest {
 
     @Test
     void cameraIntersectSphere(){
+
         Sphere sphere1=new Sphere(new Point3D(0,0,3),1);
         Camera camera1=new Camera(new Point3D(0,0,0), new Vector(0,1,0), new Vector(0,0,1));
 

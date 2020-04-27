@@ -10,6 +10,8 @@ import org.junit.Test;
 import geometries.*;
 import primitives.*;
 
+import java.util.List;
+
 /**
  * Testing Polygons
  * @author Dan
@@ -91,5 +93,26 @@ public class PolygonTests {
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals("Bad normal to trinagle", new Vector(sqrt3, sqrt3, sqrt3), pl.getNormal(new Point3D(0, 0, 1)));
     }
+
+    @Test
+    public void findIntersections() {
+
+        Polygon polygon = new Polygon(new Point3D(1,0,0),new Point3D(1,1,0)
+                ,new Point3D(1,1,1),new Point3D(1,0.5,1.5),new Point3D(1,0,1));
+
+        //T1 : Ray tangent the polygon
+        assertEquals("Ray tangent the polygon",null
+                ,polygon.findIntersections(new Ray(new Point3D(0,1,1),new Vector(1,0,0))));
+
+        //T2 : Ray intersect the polygon
+        Point3D p = new Point3D(1,0.5,1.2);
+        assertEquals("Ray intersect the polygon",
+                List.of(p),polygon.findIntersections(new Ray(new Point3D(0,0.5,2),new Vector(1,0,-0.8))));
+
+        //T3 : Ray start at the plygon
+        assertEquals("Ray start at the plygon",null
+        ,polygon.findIntersections(new Ray(new Point3D(1,0.5,0.5),new Vector(1,0,-0.8))));
+    }
+
 
 }
