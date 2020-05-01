@@ -100,8 +100,12 @@ public class TriangleTest {
         assertEquals("Ray start before the vertex of triangle", null
                 ,tr.findIntersections(new Ray(new Point3D(2,1,1),new Vector(-1,-1,-1))));
 
-        //T11 : Ray start before the front of the triangle vertex
+        //T12 : Ray start before the front of the triangle vertex
         assertEquals("Ray start before the front of the triangle vertex", null
                 ,tr.findIntersections(new Ray(new Point3D(3,0,1),new Vector(-1,-1,-1))));
+
+        //T13 : Ray start at the the triangle vertex
+        assertEquals("Ray start at the the triangle vertex", null
+        ,tr.findIntersections(new Ray(new Point3D(1,0,0),new Vector(0,-1,0))));
     }
 }
