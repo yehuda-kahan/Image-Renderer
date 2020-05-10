@@ -4,6 +4,9 @@ import primitives.*;
 
 import static primitives.Util.*;
 
+/**
+ * Present the camera which picture the scene
+ */
 public class Camera {
 
     private Point3D _p0;

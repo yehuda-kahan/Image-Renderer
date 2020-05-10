@@ -30,7 +30,7 @@ public class Scene {
      * Getter
      * @return _name
      */
-    public String get_name() {
+    public String getName() {
         return _name;
     }
 
@@ -38,7 +38,7 @@ public class Scene {
      * Getter
      * @return _background
      */
-    public Color get_background() {
+    public Color getBackground() {
         return _background;
     }
 
@@ -46,7 +46,7 @@ public class Scene {
      * Getter
      * @return _ambientLight
      */
-    public AmbientLight get_ambientLight() {
+    public AmbientLight getAmbientLight() {
         return _ambientLight;
     }
 
@@ -54,7 +54,7 @@ public class Scene {
      * Getter
      * @return _geometries
      */
-    public Geometries get_geometries() {
+    public Geometries getGeometries() {
         return _geometries;
     }
 
@@ -62,7 +62,7 @@ public class Scene {
      * Getter
      * @return _camera
      */
-    public Camera get_camera() {
+    public Camera getCamera() {
         return _camera;
     }
 
@@ -70,7 +70,7 @@ public class Scene {
      * Getter
      * @return _distance
      */
-    public double get_distance() {
+    public double getDistance() {
         return _distance;
     }
 
@@ -78,7 +78,7 @@ public class Scene {
      * Setter
      * @param background
      */
-    public void set_background(Color background) {
+    public void setBackground(Color background) {
         _background = background;
     }
 
@@ -86,7 +86,7 @@ public class Scene {
      * Setter
      * @param ambientLight
      */
-    public void set_ambientLight(AmbientLight ambientLight) {
+    public void setAmbientLight(AmbientLight ambientLight) {
         _ambientLight = ambientLight;
     }
 
@@ -94,7 +94,7 @@ public class Scene {
      * Setter
      * @param camera
      */
-    public void set_camera(Camera camera) {
+    public void setCamera(Camera camera) {
         _camera = camera;
     }
 
@@ -102,7 +102,7 @@ public class Scene {
      * Setter
      * @param distance
      */
-    public void set_distance(double distance) {
+    public void setDistance(double distance) {
         _distance = distance;
     }
 

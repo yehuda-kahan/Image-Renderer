@@ -24,7 +24,7 @@ public class ImageWriterTest {
 
         for (int j = 0; j < 800; ++j){
             for (int i = 0; i < 500; ++i){
-                if (j % 50 == 0 || i % 50 == 0)
+                if ((j % 50 == 0 || i % 50 == 0) && i != 0 && j != 0)
                     imageWriter.writePixel(j,i,net.getColor());
                 else
                   imageWriter.writePixel(j,i,backGround.getColor());
