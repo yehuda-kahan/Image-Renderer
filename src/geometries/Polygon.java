@@ -103,6 +103,7 @@ public class Polygon extends Geometry {
      *                                  </ul>
      */
     public Polygon(Color color, Point3D... vertices) {
+
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
         _vertices = List.of(vertices);

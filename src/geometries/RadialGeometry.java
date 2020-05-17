@@ -25,7 +25,7 @@ public abstract class RadialGeometry extends Geometry {
      * @param color For the emmission color of the radial geometry
      */
     public RadialGeometry(double radius , Color color){
-        _emmission = new Color(color);
+        super(color);
         _radius = radius;
     }
 

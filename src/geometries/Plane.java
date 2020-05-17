@@ -53,6 +53,7 @@ public class Plane extends Geometry {
      * @param color The emmission color of the plane
      */
     public Plane(Point3D p1, Point3D p2, Point3D p3 , Color color){
+        super(color);
 
         _p = new Point3D(p1);
 
@@ -60,7 +61,7 @@ public class Plane extends Geometry {
         Vector v2 = new Vector(p1.subtract(p3));
         // v1 is the right vector
         _normal = v1.crossProduct(v2).normalize();
-        _emmission = new Color(color);
+
     }
 
     /**

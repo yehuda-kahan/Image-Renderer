@@ -1,4 +1,4 @@
-package unittests;
+package renderer;
 
 import org.junit.Test;
 
@@ -52,7 +52,7 @@ public class RenderTests {
         scene.setBackground(Color.BLACK);
         scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.2));
 
-        scene.addGeometries(new Sphere( new Point3D(0, 0, 100),50));
+        scene.addGeometries(new Sphere( new Point3D(0, 0, 100),50, new Color(java.awt.Color.CYAN)));
 
         scene.addGeometries(
                 new Triangle(new Color(java.awt.Color.BLUE),

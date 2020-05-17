@@ -4,23 +4,19 @@ import primitives.Color;
 
 /**
  * Represents the color of ambient lighting
+ * @author Ofir Shmueli, Yehuda Kahan
  */
-public class AmbientLight {
+public class AmbientLight extends Light {
 
-    private Color _intensity;
 
     /**
      * Constructor : initialize the _intensity with the color multiply by the kA
      * @param iA The Colors of the ambient light
      * @param kA The intensity of light
      */
-    public AmbientLight(Color iA, double kA){
-        _intensity = iA.scale(kA);
+    public AmbientLight(Color iA, double kA) {
+        super(iA, kA);
+
     }
 
-    /**
-     * Getter of the ambient light field
-     * @return _intensity
-     */
-    public Color GetIntensity(){return _intensity;}
 }
