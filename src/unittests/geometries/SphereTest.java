@@ -2,10 +2,8 @@ package geometries;
 
 import org.junit.Test;
 import primitives.*;
-
-
+import geometries.Intersectable.*;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
@@ -42,17 +40,17 @@ public class SphereTest {
                 sphere.findIntersections(new Ray(new Point3D(-1, 0, 0), new Vector(1, 1, 0))));
 
         // TC02: Ray starts before and crosses the sphere (2 points)
-        Point3D p1 = new Point3D(0.0651530771650466, 0.355051025721682, 0);
-        Point3D p2 = new Point3D(1.53484692283495, 0.844948974278318, 0);
-        List<Point3D> result = sphere.findIntersections(new Ray(new Point3D(-1, 0, 0),
+        GeoPoint p1 =new GeoPoint(sphere,new Point3D(0.0651530771650466, 0.355051025721682, 0));
+        GeoPoint p2 =new GeoPoint(sphere, new Point3D(1.53484692283495, 0.844948974278318, 0));
+        List<GeoPoint> result = sphere.findIntersections(new Ray(new Point3D(-1, 0, 0),
                 new Vector(3, 1, 0)));
         assertEquals("Wrong number of points", 2, result.size());
-        if (result.get(0).get_x().getCoord() > result.get(1).get_x().getCoord())
+        if (result.get(0)._point.get_x().getCoord() > result.get(1)._point.get_x().getCoord())
             result = List.of(result.get(1), result.get(0));
         assertEquals("Ray crosses sphere", List.of(p1, p2), result);
 
         // TC03: Ray starts inside the sphere (1 point)
-        p1 = new Point3D(1.8,0.6,0);
+        p1 =new GeoPoint(sphere, new Point3D(1.8,0.6,0));
         result = sphere.findIntersections(new Ray(new Point3D(1.5,0.5,0),new Vector(3,1,0)));
         assertEquals("Ray inside the sphere", List.of(p1),result);
 
@@ -64,7 +62,7 @@ public class SphereTest {
 
         // **** Group: Ray's line crosses the sphere (but not the center)
         // TC11: Ray starts at sphere and goes inside (1 points)
-        p1 = new Point3D(0.4, 0.8, 0);
+        p1 = new GeoPoint(sphere, new Point3D(0.4, 0.8, 0));
         result = sphere.findIntersections(new Ray(new Point3D(1,1,0), new Vector(-3,-1,0)));
         assertEquals("Ray starts at sphere and goes inside", List.of(p1),result);
 
@@ -74,27 +72,27 @@ public class SphereTest {
 
         // **** Group: Ray's line goes through the center
         // TC13: Ray starts before the sphere (2 points)
-        p1 = new Point3D(0, 0, 0);
-        p2 = new Point3D(2, 0, 0);
+        p1 =new GeoPoint(sphere, new Point3D(0, 0, 0));
+        p2 =new GeoPoint(sphere, new Point3D(2, 0, 0));
         result = sphere.findIntersections(new Ray(new Point3D(-1, 0, 0),
                 new Vector(1, 0, 0)));
         assertEquals("Wrong number of points", 2, result.size());
-        if (result.get(0).get_x().getCoord() > result.get(1).get_x().getCoord())
+        if (result.get(0)._point.get_x().getCoord() > result.get(1)._point.get_x().getCoord())
             result = List.of(result.get(1), result.get(0));
         assertEquals("Ray crosses sphere (in the center)", List.of(p1, p2), result);
 
         // TC14: Ray starts at sphere and goes inside (1 points)
-        p1 = new Point3D(2, 0, 0);
+        p1 =new GeoPoint(sphere, new Point3D(2, 0, 0));
         result = sphere.findIntersections(new Ray(new Point3D(0,0,0),new Vector(1,0,0)));
         assertEquals("Ray starts at sphere and goes inside (across the center)", List.of(p1),result);
 
         // TC15: Ray starts inside (1 points)
-        p1 = new Point3D(2, 0, 0);
+        p1 =new GeoPoint(sphere, new Point3D(2, 0, 0));
         result = sphere.findIntersections(new Ray(new Point3D(1.5,0,0),new Vector(1,0,0)));
         assertEquals("Ray starts inside (center)", List.of(p1),result);
 
         // TC16: Ray starts at the center (1 points)
-        p1 = new Point3D(2, 0, 0);
+        p1 =new GeoPoint(sphere, new Point3D(2, 0, 0));
         result = sphere.findIntersections(new Ray(new Point3D(1,0,0),new Vector(1,0,0)));
         assertEquals("Ray starts at the center", List.of(p1),result);
 
@@ -125,7 +123,7 @@ public class SphereTest {
                 ,sphere.findIntersections(new Ray(new Point3D(1,2,0),new Vector(1,0,0))));
 
         // TC20: Ray is orthogonal to center minus P00 (ray's line is inside)
-        p1=new Point3D(0.5, 0, 0.8660254037844);
+        p1=new GeoPoint(sphere, new Point3D(0.5, 0, 0.8660254037844));
         result = sphere.findIntersections(new Ray(new Point3D(0.5,0,0), new Vector(0,0,1)));
         assertEquals("Ray is orthogonal to center minus P00", List.of(p1), result);
 

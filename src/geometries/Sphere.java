@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -15,11 +16,23 @@ public class Sphere extends RadialGeometry {
     Point3D _center;
 
     /**
-     * constructor which gets point and sets to local field
+     * constructor which gets point and radius and set the locals fields
      * @param point
      */
     public Sphere(Point3D point, double radius){
         super(radius);
+        _center =new Point3D(point);
+    }
+
+    /**
+     * constructor which gets point and radius and set the locals fields
+     * and also get the emmission color of the sphere
+     * @param point
+     * @param radius
+     * @param color
+     */
+    public Sphere(Point3D point, double radius , Color color){
+        super(radius,color);
         _center =new Point3D(point);
     }
 
@@ -43,13 +56,13 @@ public class Sphere extends RadialGeometry {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
 
         // Ray start at the center of the sphere
         if(ray.get_POO().equals(_center))
         {
-            Point3D p = new Point3D(ray.getPoint(_radius));
-            return List.of(p);
+            GeoPoint geoPoint = new GeoPoint(this,new Point3D(ray.getPoint(_radius)));
+            return List.of(geoPoint);
         }
         Vector u = ray.get_POO().subtract(_center);
         double tm = alignZero(u.dotProduct(ray.get_direction()));
@@ -61,9 +74,9 @@ public class Sphere extends RadialGeometry {
         double t2 = alignZero(tm-th);
         if(t1>0 && t2>0)
         {
-            Point3D p1 = new Point3D(ray.getPoint(t1));
-            Point3D p2 = new Point3D(ray.getPoint(t2));
-            return List.of(p1,p2);
+            GeoPoint geoPoint1 = new GeoPoint(this, new Point3D(ray.getPoint(t1)));
+            GeoPoint geoPoint2 = new GeoPoint(this, new Point3D(ray.getPoint(t2)));
+            return List.of(geoPoint1,geoPoint2);
         }
         if(t1<=0 && t2<=0)
         {
@@ -71,13 +84,13 @@ public class Sphere extends RadialGeometry {
         }
         if(t1>0 && t2<=0)
         {
-            Point3D p1 = new Point3D(ray.getPoint(t1));
-            return List.of(p1);
+            GeoPoint geoPoint = new GeoPoint(this, new Point3D(ray.getPoint(t1)));
+            return List.of(geoPoint);
         }
         if(t1<=0 && t2>0)
         {
-            Point3D p2 = new Point3D(ray.getPoint(t2));
-            return List.of(p2);
+            GeoPoint geoPoint = new GeoPoint(this, new Point3D(ray.getPoint(t2)));
+            return List.of(geoPoint);
         }
         return null;
     }

@@ -1,6 +1,7 @@
 package geometries;
 
 import primitives.*;
+import primitives.Color;
 import primitives.Vector;
 
 import java.awt.*;
@@ -24,13 +25,24 @@ public class Triangle extends Polygon {
         super(new Point3D(p1), new Point3D(p2), new Point3D(p3));
     }
 
+    /**
+     * constructor that gets 3 points and sets local fields
+     * and gets the emmission color of the triangle
+     * @param p1
+     * @param p2
+     * @param p3
+     */
+    public Triangle(Color color, Point3D p1, Point3D p2, Point3D p3 ){
+        super(color,new Point3D(p1), new Point3D(p2), new Point3D(p3));
+    }
+
     @Override
     public String toString() {
         return super.toString();
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
 
         if (_plane.findIntersections(ray) == null) // Ray doesn't intersect with the triangle
             return null;

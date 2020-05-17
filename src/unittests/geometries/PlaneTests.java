@@ -2,9 +2,8 @@ package geometries;
 
 import org.junit.Test;
 import geometries.Plane;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
+import geometries.Intersectable.GeoPoint;
 
 import java.util.List;
 
@@ -60,8 +59,8 @@ public class PlaneTests {
         , plane.findIntersections(new Ray(new Point3D(1,1,1), new Vector(0,0,1))));
 
         //T2 : Ray intersect the plane
-        Point3D p = new Point3D(1,1,-1);
-        List<Point3D> result = plane.findIntersections(new Ray(new Point3D(1,1,1),new Vector(0,0,-1)));
+        GeoPoint p = new GeoPoint(plane,new Point3D(1,1,-1));
+        List<GeoPoint> result = plane.findIntersections(new Ray(new Point3D(1,1,1),new Vector(0,0,-1)));
         assertEquals("Ray intersect the plane", List.of(p),result);
 
         // =============== Boundary Values Tests ==================
@@ -77,7 +76,7 @@ public class PlaneTests {
 
         // ** Group - Ray is orthogonal to the plane
         //T5 : Ray start before the plane
-        p = new Point3D(1/3d,1/3d,1/3d);
+        p = new GeoPoint(plane,new Point3D(1/3d,1/3d,1/3d));
         result = plane.findIntersections(new Ray(new Point3D(1,1,1),new Vector(-1,-1,-1)));
         assertEquals("Ray start before the plane",List.of(p),result);
 
@@ -99,7 +98,7 @@ public class PlaneTests {
         , plane.findIntersections(new Ray(new Point3D(1,0,0), new Vector(1,1,2))));
 
         //T10 : Ray insert with the point which appears as reference point in the plane
-        p = new Point3D(1,0,0);
+        p =new GeoPoint(plane, new Point3D(1,0,0));
         result = plane.findIntersections(new Ray(new Point3D(2,1,1), new Vector(-1,-1,-1)));
         assertEquals("Ray start at the same point which appears as reference point in the plane",List.of(p)
                 , result);

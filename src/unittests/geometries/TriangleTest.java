@@ -1,10 +1,11 @@
 package geometries;
 
-import geometries.Triangle;
+import geometries.*;
 import org.junit.Test;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
+import geometries.Intersectable.GeoPoint;
 
 import java.util.List;
 
@@ -48,11 +49,11 @@ public class TriangleTest {
         // ============ Equivalence Partitions Tests ==============
 
         //T1 : Ray is against the triangle
-        Point3D p = new Point3D(1/3d,1/3d,1/3d);
-        List<Point3D> result = tr.findIntersections(new Ray(new Point3D(1,1,1), new Vector(-1,-1,-1)));
+        GeoPoint p = new GeoPoint(tr,new Point3D(1/3d,1/3d,1/3d));
+        List<GeoPoint> result = tr.findIntersections(new Ray(new Point3D(1,1,1), new Vector(-1,-1,-1)));
         assertEquals("Ray is against the triangle", List.of(p),result);
 
-        p = new Point3D(0.4285714285714, 0.4285714285714, 0.1428571428571);
+        p = new GeoPoint(tr, new Point3D(0.4285714285714, 0.4285714285714, 0.1428571428571));
         result = tr.findIntersections(new Ray(new Point3D(1,1,1), new Vector(-1,-1,-1.5)));
         assertEquals("Ray is against the triangle", List.of(p),result);
 

@@ -6,6 +6,7 @@ import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import scene.*;
+import geometries.Intersectable.GeoPoint;
 
 import java.util.List;
 
@@ -28,6 +29,9 @@ public class Render {
         _scene = scene;
     }
 
+    /**
+     * Takes the scene and the image writer and makes the photo with them
+     */
     public void renderImage(){
 
         Camera camera = _scene.getCamera();
@@ -43,32 +47,44 @@ public class Render {
             for (int j = 0; j < nX; ++j){
                 Ray ray = camera.constructRayThroughPixel(nX,nY,j,i,distance,width,height);
 
-                List<Point3D> intersectionPoints = geometries.findIntersections(ray);
+                List<GeoPoint> intersectionPoints = geometries.findIntersections(ray);
                 if (intersectionPoints == null)
                     _imageWriter.writePixel(j, i, background);
                 else{
-                    Point3D closestPoint = getClosestPoint(intersectionPoints);
+                    GeoPoint closestPoint = getClosestPoint(intersectionPoints);
                     _imageWriter.writePixel(j, i, calcColor(closestPoint).getColor());
                 }
             }
     }
 
-    private Point3D getClosestPoint(List<Point3D> points){
+    /**
+     * calculate the closest point from the given points, from our camera
+     * @param points
+     * @return The closest point between all the given points
+     */
+    private GeoPoint getClosestPoint(List<GeoPoint> points){
         double distance = Double.MAX_VALUE;
         Point3D P0 = _scene.getCamera().get_p0();
-        Point3D minDistancePoint = null;
+        GeoPoint minDistancePoint = null;
 
-        for (Point3D point: points)
-            if (P0.distance(point) < distance){
-                minDistancePoint = new Point3D(point);
-                distance = P0.distance(point);
+        for (GeoPoint point: points)
+            if (P0.distance(point._point) < distance){
+                minDistancePoint = new GeoPoint(point._geometry,point._point);
+                distance = P0.distance(point._point);
             }
 
         return minDistancePoint;
     }
 
-    private Color calcColor(Point3D point) {
-        return _scene.getAmbientLight().GetIntensity();
+    /**
+     * Calculate the color of the pixel in the given point
+     * @param point
+     * @return The appropriate color
+     */
+    private Color calcColor(GeoPoint point) {
+        Color color = _scene.getAmbientLight().GetIntensity();
+        color = color.add(point._geometry.getEmmission());
+        return color;
     }
 
     public void printGrid(int interval, java.awt.Color color){
@@ -83,6 +99,9 @@ public class Render {
             }
     }
 
+    /**
+     *  Make the image file (after the renderImage)
+     */
     public void writeToImage(){
         _imageWriter.writeToImage();
     }

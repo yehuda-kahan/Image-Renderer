@@ -4,6 +4,7 @@ import org.junit.Test;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
+import geometries.Intersectable.GeoPoint;
 
 import java.util.List;
 
@@ -41,18 +42,18 @@ public class TubeTest {
 
         // ============ Equivalence Partitions Tests ==============
 
-        Point3D p1;
+        GeoPoint p1;
 
         //T1 : Ray start inside the tube and intersect ones
-        p1 = new Point3D(1.8660254037844,0.5,-0.1928203230276);
+        p1 = new GeoPoint(tube , new Point3D(1.8660254037844,0.5,-0.1928203230276));
         assertEquals("Ray start inside the tube and intersect ones", List.of(p1)
                 ,tube.findIntersections(new Ray(new Ray(new Point3D(1,0.5,0.5),new Vector(1,0,-0.8)))));
 
         //T2 ; Ray cross the tube and intersect him Twice
-        p1 = new Point3D(0,0,0.5);
+        p1 = new GeoPoint(tube , new Point3D(0,0,0.5));
         Point3D p2 = new Point3D(2,0,0.5);
-        List<Point3D> result = tube.findIntersections(new Ray(new Point3D(-1,0,0.5),new Vector(1,0,0)));
-        if (result.get(0).get_x().getCoord() > 0)
+        List<GeoPoint> result = tube.findIntersections(new Ray(new Point3D(-1,0,0.5),new Vector(1,0,0)));
+        if (result.get(0)._point.get_x().getCoord() > 0)
             result = List.of(result.get(1),result.get(0));
         assertEquals("Ray cross the tube and intersect him Twice", List.of(p1,p2)
                 ,result);
@@ -78,7 +79,7 @@ public class TubeTest {
             ,tube.findIntersections(new Ray(new Point3D(2,0,1),new Vector(1,1,0))));
 
         //T6 : Ray start at the tube and goes inside
-        p1 = new Point3D(1,1,1);
+        p1 = new GeoPoint(tube , new Point3D(1,1,1));
         assertEquals("Ray start at the tube and goes inside",List.of(p1)
                 , tube.findIntersections(new Ray(new Point3D(2,0,1),new Vector(-1,1,0))));
 
@@ -91,7 +92,7 @@ public class TubeTest {
                 ,tube.findIntersections(new Ray(new Point3D(1,0,0),new Vector(0,0,1))));
 
         //T9 : Ray start at the p0 that present the beginning of the axis, and intersect the tube
-        p1 = new Point3D(1,1,0);
+        p1 = new GeoPoint(tube , new Point3D(1,1,0));
         assertEquals("Ray start at the p0 that present the beginning of the axis, and intersect the tube"
                 ,List.of(p1),tube.findIntersections(new Ray(new Point3D(1,0,0),new Vector(0,1,0))));
 

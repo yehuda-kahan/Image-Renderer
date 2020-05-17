@@ -1,10 +1,12 @@
 package geometries;
 
+import primitives.Color;
+
 /**
  * presenting a radial geometry
  * @author Ofir Shmueli, Yehuda Kahan
  */
-public abstract class RadialGeometry implements Geometry {
+public abstract class RadialGeometry extends Geometry {
     double _radius;
 
 
@@ -13,6 +15,17 @@ public abstract class RadialGeometry implements Geometry {
      * @param radius
      */
     public RadialGeometry(double radius){
+        _radius = radius;
+    }
+
+    /**
+     * constructor that gets double value and sets to local param (radius)
+     * and also get color for the emmisiion color of the radial geometry
+     * @param radius
+     * @param color For the emmission color of the radial geometry
+     */
+    public RadialGeometry(double radius , Color color){
+        _emmission = new Color(color);
         _radius = radius;
     }
 

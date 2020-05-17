@@ -11,7 +11,7 @@ import static primitives.Util.isZero;
  * presenting a plane by a point and normal
  * @author Ofir Shmueli, Yehuda Kahan
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 
     Point3D _p;
     Vector _normal;
@@ -30,7 +30,7 @@ public class Plane implements Geometry {
     }
 
     /**
-     *  constructor that gets 3 points, calculates the normal and sets to local fields
+     *  Constructor that gets 3 points, calculates the normal and sets to local fields
      * @param p1
      * @param p2
      * @param p3
@@ -42,6 +42,25 @@ public class Plane implements Geometry {
         Vector v2 = new Vector(p1.subtract(p3));
         // v1 is the right vector
         _normal = v1.crossProduct(v2).normalize();
+    }
+
+    /**
+     * Constructor that gets 3 points, calculates the normal and sets to local fields
+     * and get the color of the emmissiom and set the appropriate filed
+     * @param p1 #1 point on the plane
+     * @param p2 #2 point on the plane
+     * @param p3 #3 point on the plane
+     * @param color The emmission color of the plane
+     */
+    public Plane(Point3D p1, Point3D p2, Point3D p3 , Color color){
+
+        _p = new Point3D(p1);
+
+        Vector v1 = new Vector(p1.subtract(p2));
+        Vector v2 = new Vector(p1.subtract(p3));
+        // v1 is the right vector
+        _normal = v1.crossProduct(v2).normalize();
+        _emmission = new Color(color);
     }
 
     /**
@@ -87,7 +106,7 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
 
         if (ray.get_POO().equals(_p)) // Ray start at the point that present the plane
             return null;
@@ -101,8 +120,8 @@ public class Plane implements Geometry {
         double t = alignZero(nQMinusP0/nv);
 
         if (t > 0) {
-            Point3D p = new Point3D(ray.getPoint(t));
-            return List.of(p);
+            GeoPoint geoPoint = new GeoPoint(this,new Point3D(ray.getPoint(t)));
+            return List.of(geoPoint);
         }
         return null;
     }

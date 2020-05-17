@@ -4,11 +4,11 @@
 package geometries;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import geometries.*;
 import primitives.*;
+import geometries.Intersectable.*;
 
 import java.util.List;
 
@@ -105,9 +105,9 @@ public class PolygonTests {
                 ,polygon.findIntersections(new Ray(new Point3D(0,1,1),new Vector(1,0,0))));
 
         //T2 : Ray intersect the polygon
-        Point3D p = new Point3D(1,0.5,1.2);
+        GeoPoint geoPoint =new GeoPoint(polygon, new Point3D(1,0.5,1.2));
         assertEquals("Ray intersect the polygon",
-                List.of(p),polygon.findIntersections(new Ray(new Point3D(0,0.5,2),new Vector(1,0,-0.8))));
+                List.of(geoPoint),polygon.findIntersections(new Ray(new Point3D(0,0.5,2),new Vector(1,0,-0.8))));
 
         //T3 : Ray start at the plygon
         assertEquals("Ray start at the plygon",null

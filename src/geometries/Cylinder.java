@@ -23,6 +23,19 @@ public class Cylinder extends Tube {
     }
 
     /**
+     * constructor that gets a ray, radius and height,
+     * sends the ray and the radius to the parent constructor and sets height to local field
+     * and gets the emission color of the cylinder
+     * @param ray
+     * @param radius
+     * @param height
+     */
+    public Cylinder(Ray ray, double radius, double height, Color color){
+        super(ray, radius,color);
+        _height=height;
+    }
+
+    /**
      * getter
      * @return _height
      */
@@ -55,7 +68,7 @@ public class Cylinder extends Tube {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
         return null;
     }
 }

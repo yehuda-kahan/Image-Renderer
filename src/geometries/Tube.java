@@ -23,6 +23,17 @@ public class Tube extends RadialGeometry {
     }
 
     /**
+     * constructor that gets ray and radius, radius sent to parent constructor and ray sets to local field
+     * and gets the emmission color of the tube
+     * @param axisRay
+     * @param radius
+     */
+    public Tube(Ray axisRay, double radius , Color color){
+        super(radius, color);
+        _axisRay=new Ray(axisRay);
+    }
+
+    /**
      * getter
      * @return _axisRay
      */
@@ -51,73 +62,9 @@ public class Tube extends RadialGeometry {
         return new Vector(O.subtract(point)).normalize();
     }
 
+
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
-
-
-        double xp = ray.get_POO().get_x().getCoord();
-        double yp = ray.get_POO().get_y().getCoord();
-        double zp = ray.get_POO().get_z().getCoord();
-        double xv = ray.get_direction().get_head().get_x().getCoord();
-        double yv = ray.get_direction().get_head().get_y().getCoord();
-        double zv = ray.get_direction().get_head().get_z().getCoord();
-        double r = _radius;
-        Point3D p1;
-        Point3D p2;
-
-        double a = 0;
-        double b = 0;
-        double c = 0;
-        double xm = 0;
-        double ym = 0;
-        double zm = 0;
-        double xm1 = 0;
-        double ym1 = 0;
-        double zm1 = 0;
-        double xm2 = 0;
-        double ym2 = 0;
-        double zm2 = 0;
-        double lambda = 0;
-        double lambda1 = 0;
-        double lambda2 = 0;
-        double delta = 0;
-        double rrad = 0;
-
-        a = Math.pow(xv, 2) + Math.pow(yv, 2);
-        b = 2 * (xv * xp + yv * yp);
-        c = Math.pow(xp, 2) + Math.pow(yp, 2) - Math.pow(r, 2);
-
-        delta = Math.pow(b, 2) - 4 * a * c;
-
-        if (a == 0 && b == 0 && c == 0)
-            return null;
-        else {
-            if (delta < 0)
-                return null;
-            else if (delta == 0) {
-                //printf("1 intersection point :\n");
-                lambda = -b / 2 * a;
-                xm = xp + lambda * xv;
-                ym = yp + lambda * yv;
-                zm = zp + lambda * zv;
-                p1 = new Point3D(xm,ym,zm);
-                return List.of(p1);
-            } else if (delta > 0) {
-                //printf("2 intersection points :\n");
-                lambda = (-b - Math.sqrt(delta)) / (2 * a);
-                lambda2 = (-b + Math.sqrt(delta)) / (2 * a);
-                xm1 = xp + lambda * xv;
-                ym1 = yp + lambda * yv;
-                zm1 = zp + lambda * zv;
-
-                xm2 = xp + lambda2 * xv;
-                ym2 = yp + lambda2 * yv;
-                zm2 = zp + lambda2 * zv;
-                p1 = new Point3D(xm1, ym1,zm1);
-                p2 = new Point3D(xm2, ym2, zm2);
-                return List.of(p1,p2);
-            }
-        }
+    public List<GeoPoint> findIntersections(Ray ray) {
         return null;
     }
 }
