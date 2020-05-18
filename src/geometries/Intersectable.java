@@ -7,6 +7,7 @@ public interface Intersectable {
 
     /**
      * Represent a point on a specific geometry
+     * @author Ofir Shmueli, Yehuda Kahan
      */
     public static class GeoPoint {
         public Geometry _geometry;

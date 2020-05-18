@@ -5,6 +5,7 @@ import java.util.*;
 
 /**
  * present a collection of geometries
+ * @author Ofir Shmueli, Yehuda Kahan
  */
 public class Geometries implements Intersectable {
 

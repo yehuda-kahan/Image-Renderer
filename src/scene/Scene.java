@@ -6,6 +6,7 @@ import primitives.*;
 
 /**
  * Represents the scene in our picture
+ * @author Ofir Shmueli, Yehuda Kahan
  */
 public class Scene {
 

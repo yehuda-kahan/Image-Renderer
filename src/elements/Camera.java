@@ -6,6 +6,7 @@ import static primitives.Util.*;
 
 /**
  * Present the camera which picture the scene
+ * @author Ofir Shmueli, Yehuda Kahan
  */
 public class Camera {
 
@@ -14,6 +15,14 @@ public class Camera {
     private Vector _vTo;
     private Vector _vRight;
 
+    /**
+     * Constructor that makes dot-product between vTo and vUp.
+     * sets p0
+     * sets and normalize vTo and vUp
+     * @param p0
+     * @param vTo
+     * @param vUp
+     */
     public Camera(Point3D p0, Vector vTo, Vector vUp){
 
         if (!isZero(vUp.dotProduct(vTo)))
@@ -58,18 +67,34 @@ public class Camera {
     }
 
 
+    /**
+     * getter
+     * @return _po
+     */
     public Point3D get_p0() {
         return _p0;
     }
 
+    /**
+     * getter
+     * @return _vUp
+     */
     public Vector get_vUp() {
         return _vUp;
     }
 
+    /**
+     * getter
+     * @return _vRight
+     */
     public Vector get_vRight() {
         return _vRight;
     }
 
+    /**
+     * getter
+     * @return _vTo
+     */
     public Vector get_vTo() {
         return _vTo;
     }

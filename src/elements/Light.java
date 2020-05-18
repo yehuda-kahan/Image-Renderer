@@ -10,7 +10,7 @@ abstract class Light {
     protected Color _intensity;
 
     /**
-     * Constructor
+     * Constructor that scales kA
      * @param intensity
      */
     Light(Color intensity, double kA){

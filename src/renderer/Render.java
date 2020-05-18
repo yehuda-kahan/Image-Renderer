@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Present image renderer
+ * @author Ofir Shmueli, Yehuda Kahan
  */
 public class Render {
 
