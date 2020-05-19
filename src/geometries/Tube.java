@@ -34,6 +34,21 @@ public class Tube extends RadialGeometry {
     }
 
     /**
+     * constructor that gets ray and radius, radius sent to parent constructor and ray sets to local field
+     * and gets the emmission color of the tube
+     * and gets the material which the tube is made of
+     * @param axisRay
+     * @param radius
+     * @param color
+     * @param material
+     */
+    public Tube(Ray axisRay, double radius , Color color, Material material){
+
+        this(axisRay,radius,color);
+        _material = new Material(material.getKD(),material.getKS(),material.getNShininess());
+    }
+
+    /**
      * getter
      * @return _axisRay
      */

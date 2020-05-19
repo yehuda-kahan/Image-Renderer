@@ -36,6 +36,22 @@ public class Cylinder extends Tube {
     }
 
     /**
+     * constructor that gets a ray, radius and height,
+     * sends the ray and the radius to the parent constructor and sets height to local field
+     * and gets the emission color of the cylinder
+     * and gets the material which the cylinder is made of
+     * @param ray
+     * @param radius
+     * @param height
+     * @param color
+     * @param material
+     */
+    public Cylinder(Ray ray, double radius, double height, Color color, Material material){
+        this(ray, radius, height, color);
+        _material = new Material(material.getKD(),material.getKS(),material.getNShininess());
+    }
+
+    /**
      * getter
      * @return _height
      */

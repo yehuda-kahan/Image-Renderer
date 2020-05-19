@@ -4,6 +4,9 @@ import elements.*;
 import geometries.*;
 import primitives.*;
 
+import java.util.*;
+
+
 /**
  * Represents the scene in our picture
  * @author Ofir Shmueli, Yehuda Kahan
@@ -16,6 +19,7 @@ public class Scene {
     private Geometries _geometries;
     private Camera _camera;
     private double _distance;
+    private List<LightSource> _lights;
 
 
     /**
@@ -25,6 +29,15 @@ public class Scene {
     public Scene(String name){
         _name = name;
         _geometries = new Geometries();
+        _lights = new LinkedList<LightSource>();
+    }
+
+    /**
+     * Getter
+     * @return _lights
+     */
+    public List<LightSource> getLights() {
+        return _lights;
     }
 
     /**
@@ -107,7 +120,17 @@ public class Scene {
         _distance = distance;
     }
 
+    /**
+     * Add all the given geometries to the _geometries filed
+     * @param geometries
+     */
     public void addGeometries(Intersectable... geometries){
         _geometries.add(geometries);
     }
+
+    /**
+     * Add all the given source light to the _light filed
+     * @param lights
+     */
+    public void addLights(LightSource... lights) { _lights.addAll(List.of(lights)); }
 }

@@ -31,11 +31,13 @@ public class Plane extends Geometry {
 
     /**
      *  Constructor that gets 3 points, calculates the normal and sets to local fields
+     *  and initialized the _emission filed to the default color - black
      * @param p1
      * @param p2
      * @param p3
      */
     public Plane(Point3D p1, Point3D p2, Point3D p3){
+
         _p = new Point3D(p1);
 
         Vector v1 = new Vector(p1.subtract(p2));
@@ -46,22 +48,34 @@ public class Plane extends Geometry {
 
     /**
      * Constructor that gets 3 points, calculates the normal and sets to local fields
+     * and get the color of the emissiom and set the appropriate filed
+     * @param p1 #1 point on the plane
+     * @param p2 #2 point on the plane
+     * @param p3 #3 point on the plane
+     * @param color The emission color of the plane
+     */
+    public Plane(Point3D p1, Point3D p2, Point3D p3 , Color color){
+
+        this(p1,p2,p3);
+        _emmission = new Color(color);
+    }
+
+
+
+    /**
+     * Constructor that gets 3 points, calculates the normal and sets to local fields
      * and get the color of the emmissiom and set the appropriate filed
+     * and get the material which the geometry made of, and set the appropriate filed
      * @param p1 #1 point on the plane
      * @param p2 #2 point on the plane
      * @param p3 #3 point on the plane
      * @param color The emmission color of the plane
+     * @param material which the geometry made of
      */
-    public Plane(Point3D p1, Point3D p2, Point3D p3 , Color color){
-        super(color);
+    public Plane(Point3D p1, Point3D p2, Point3D p3 , Color color , Material material){
 
-        _p = new Point3D(p1);
-
-        Vector v1 = new Vector(p1.subtract(p2));
-        Vector v2 = new Vector(p1.subtract(p3));
-        // v1 is the right vector
-        _normal = v1.crossProduct(v2).normalize();
-
+        this(p1,p2,p3,color);
+         _material = new Material(material.getKD(),material.getKS(),material.getNShininess());
     }
 
     /**

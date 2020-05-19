@@ -17,14 +17,13 @@ public class PointLight extends Light implements LightSource {
     /**
      * Constructor
      * @param intensity of the color
-     * @param kA attenuation of the intensity
      * @param kC attenuation of the distance
      * @param kL attenuation of the distance (linear)
      * @param kQ attenuation of the distance (square)
      * @param position Position of spot light
      */
-    public PointLight(Color intensity, double kA, double kC, double kL, double kQ, Point3D position){
-        super(intensity, kA);
+    public PointLight(Color intensity, double kC, double kL, double kQ, Point3D position){
+        super(intensity, 1);
         _kC = kC;
         _kL = kL;
         _kQ = kQ;

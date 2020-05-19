@@ -2,9 +2,7 @@ package renderer;
 
 import elements.*;
 import geometries.*;
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Ray;
+import primitives.*;
 import scene.*;
 import geometries.Intersectable.GeoPoint;
 
@@ -83,11 +81,69 @@ public class Render {
      * @return The appropriate color
      */
     private Color calcColor(GeoPoint point) {
-        Color color = _scene.getAmbientLight().GetIntensity();
+        Color color = _scene.getAmbientLight().getIntensity();
         color = color.add(point._geometry.getEmmission());
+
+        Vector v = _scene.getCamera().get_p0().subtract(point._point).normalize();
+        Vector n = point._geometry.getNormal(point._point);
+        Material material = point._geometry.getMaterial();
+        int nShininess = material.getNShininess();
+        double kd = material.getKD();
+        double ks = material.getKS();
+
+        double nv = n.dotProduct(v);
+
+        for (LightSource lightSource : _scene.getLights()){
+            Vector l = lightSource.getL(point._point);
+            double nl = n.dotProduct(l);
+            if ((nv >= 0 && nl >= 0) || (nv <= 0 && nl <= 0)){
+                Color lightIntensity = lightSource.getIntensity(point._point);
+                color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                        calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+            }
+        }
         return color;
     }
 
+    /**
+     * calculate the diffuse of the light
+     * and according that we draw the color in the specific point
+     *
+     * @param kd attenuation of the Diffuse
+     * @param l the direction from the light source to the point
+     * @param n the normal to the geometry
+     * @param lightIntensity on the point (according the kind of the light source)
+     * @return
+     */
+    private Color calcDiffusive(double kd, Vector l, Vector n , Color lightIntensity){
+
+        return lightIntensity.scale(kd * Math.abs(l.dotProduct(n)));
+    }
+
+    /**
+     * calculate the specular of the light
+     * and according that we draw the color in the specific point
+     *
+     * @param ks attenuation of the Specular
+     * @param l the direction from the light source to the point
+     * @param n the normal to the geometry
+     * @param v the direction of the camera
+     * @param nShininess the shininess level of the geometry
+     * @param lightIntensity on the point (according the kind of the light source)
+     * @return
+     */
+    private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity){
+        Vector r = n.scale(2 * l.dotProduct(n)).subtract(l);
+        Vector minusV = v.scale(-1);
+        return lightIntensity.scale(ks * Math.pow(r.dotProduct(minusV),nShininess));
+    }
+
+    /**
+     * Print a grid on the picture with size of Squares according
+     * the interval
+     * @param interval
+     * @param color
+     */
     public void printGrid(int interval, java.awt.Color color){
 
         int nX = _imageWriter.getNx();

@@ -16,7 +16,6 @@ public class AmbientLight extends Light {
      */
     public AmbientLight(Color iA, double kA) {
         super(iA, kA);
-
     }
 
 }

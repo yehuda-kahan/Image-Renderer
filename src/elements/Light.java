@@ -7,6 +7,7 @@ import primitives.Color;
  * @author Ofir Shmueli, Yehuda Kahan
  */
 abstract class Light {
+
     protected Color _intensity;
 
     /**

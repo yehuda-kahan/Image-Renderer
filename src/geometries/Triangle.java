@@ -36,6 +36,21 @@ public class Triangle extends Polygon {
         super(color,new Point3D(p1), new Point3D(p2), new Point3D(p3));
     }
 
+    /**
+     * constructor that gets 3 points and sets local fields
+     * and gets the emmission color of the triangle
+     * and gets the material which the triangle made of
+     * @param color
+     * @param material
+     * @param p1
+     * @param p2
+     * @param p3
+     */
+    public Triangle(Color color,Material material, Point3D p1, Point3D p2, Point3D p3 ){
+
+        super(color,material,new Point3D(p1), new Point3D(p2), new Point3D(p3));
+    }
+
     @Override
     public String toString() {
         return super.toString();

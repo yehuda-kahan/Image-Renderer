@@ -1,6 +1,7 @@
 package geometries;
 
 import primitives.Color;
+import primitives.Material;
 
 /**
  * presenting a radial geometry
@@ -27,6 +28,12 @@ public abstract class RadialGeometry extends Geometry {
     public RadialGeometry(double radius , Color color){
         super(color);
         _radius = radius;
+    }
+
+    public RadialGeometry(double radius , Color color , Material material){
+
+        this(radius,color);
+        _material = new Material(material.getKD(),material.getKS(),material.getNShininess());
     }
 
     /**
