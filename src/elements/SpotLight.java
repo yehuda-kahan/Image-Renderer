@@ -39,4 +39,9 @@ public class SpotLight extends PointLight  {
     public Vector getL(Point3D p) {
         return super.getL(p).normalize();
     }
+
+    @Override
+    public double getDistance(Point3D point) {
+        return super.getDistance(point);
+    }
 }
