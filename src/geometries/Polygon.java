@@ -136,7 +136,7 @@ public class Polygon extends Geometry {
     public Polygon(Color color,Material material, Point3D... vertices){
 
         this(color,vertices);
-        _plane._material = new Material(material.getKD(),material.getKS(),material.getNShininess());
+        _plane._material = material;
     }
 
 
@@ -151,9 +151,16 @@ public class Polygon extends Geometry {
         if (_plane.findIntersections(ray) == null) // Ray doesn't intersect with the triangle
             return null;
 
+        Vector temp;
         List<Vector> vectors = new ArrayList<>();
         for (int i = 0; i < _vertices.size(); ++i) {
-            vectors.add(new Vector(ray.get_POO()).subtract(new Vector(_vertices.get(i))));
+
+            vectors.add(new Point3D(ray.get_POO()).subtract(new Point3D(_vertices.get(i))));
+            /*try {
+                temp = new Vector(ray.get_POO()).subtract(new Vector(_vertices.get(i)));
+            }
+            catch (IllegalArgumentException ex){return null; }
+            vectors.add(temp);*/
         }
 
         List<Vector> normals = new ArrayList<>();

@@ -29,6 +29,12 @@ public class Plane extends Geometry {
         _normal = new Vector(vector);
     }
 
+    public Plane(Point3D point, Vector vector, Color color , Material material){
+        this(point,vector);
+        _emmission = color;
+        _material = material;
+    }
+
     /**
      *  Constructor that gets 3 points, calculates the normal and sets to local fields
      *  and initialized the _emission filed to the default color - black
@@ -75,7 +81,7 @@ public class Plane extends Geometry {
     public Plane(Point3D p1, Point3D p2, Point3D p3 , Color color , Material material){
 
         this(p1,p2,p3,color);
-         _material = new Material(material.getKD(),material.getKS(),material.getNShininess());
+         _material = material;
     }
 
     /**

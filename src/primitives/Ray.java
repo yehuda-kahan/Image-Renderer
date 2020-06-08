@@ -11,6 +11,9 @@ public class Ray {
     final Point3D _POO;
     final Vector _direction;
 
+    // Constant for moving the ray
+    private static final double DELTA = 0.1;
+
     /**
      * constructor that gets a point and a vector and sets to local fields
      * @param point
@@ -19,6 +22,20 @@ public class Ray {
     public Ray(Point3D point, Vector vector){
         _POO = new Point3D(point);
         _direction = new Vector(vector).normalize();
+    }
+
+    /**
+     * constructor that gets head point, direction, and normal
+     * and construct a ray that start from head + delta in the direcion of the
+     * normal.
+     * @param head The head point of the ray (+ delta)
+     * @param direction The direction of the ray
+     * @param normal The direction of the delta
+     */
+    public Ray(Point3D head, Vector direction, Vector normal){
+        Vector delta = normal.scale(normal.dotProduct(direction) > 0 ? DELTA : - DELTA);
+        _POO = head.add(delta);
+        _direction = direction;
     }
 
     /**

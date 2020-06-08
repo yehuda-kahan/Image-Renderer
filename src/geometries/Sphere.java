@@ -46,7 +46,7 @@ public class Sphere extends RadialGeometry {
     public Sphere(Point3D point, double radius , Color color, Material material){
 
         this(point,radius,color);
-        _material = new Material(material.getKD(),material.getKS(),material.getNShininess());
+        _material = material;
     }
 
     /**
