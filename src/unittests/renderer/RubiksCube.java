@@ -35,13 +35,13 @@ public class RubiksCube {
                ,new Polygon(new Color(java.awt.Color.ORANGE),new Material(0.2,0.4,50,0,0) // BOTTOM
                       , new Point3D(0,0,0), new Point3D(-50,0,50), new Point3D(0,0,100),new Point3D(50,0,50))
 
-                ,new Plane(new Point3D(0,0,0),new Vector(0,1,0),new Color(java.awt.Color.DARK_GRAY),new Material(0.2,0.1,100,0,0.8))
+                ,new Plane(new Point3D(0,0,0),new Vector(0,10,7),new Color(java.awt.Color.DARK_GRAY),new Material(0.2,0.1,100,0,0.8))
 
         );
 
         /*scene.addLights(
                 new PointLight(new Color(0,900,790),1,0.00001, 0.000001,new Point3D(105,105,48))
-                ,new DirectionalLight(new Color(5,600,0),new Vector(-1,1,1))
+                ,new DirectionalLight(new Color(java.awt.Color.WHITE),new Vector(-1,1,1))
         );*/
 
 
