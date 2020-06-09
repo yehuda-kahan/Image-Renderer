@@ -26,7 +26,7 @@ public class Plane extends Geometry {
             throw new IllegalArgumentException("The vector cannot be the Zero vector");
         }
         _p = new Point3D(point);
-        _normal = new Vector(vector);
+        _normal = new Vector(vector).normalize();
     }
 
     public Plane(Point3D point, Vector vector, Color color , Material material){

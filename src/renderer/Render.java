@@ -176,7 +176,13 @@ public class Render {
      * @return
      */
     private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity){
-        Vector r = n.scale(2 * l.dotProduct(n)).subtract(l);
+        Vector r = null;
+        try {
+            r = n.scale(2 * l.dotProduct(n)).subtract(l);
+        }
+        catch (IllegalArgumentException ex){
+            return Color.BLACK;
+        }
         Vector minusV = v.scale(-1);
         return lightIntensity.scale(ks * Math.pow(r.dotProduct(minusV),nShininess));
     }

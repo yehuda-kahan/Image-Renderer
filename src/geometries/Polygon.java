@@ -155,12 +155,7 @@ public class Polygon extends Geometry {
         List<Vector> vectors = new ArrayList<>();
         for (int i = 0; i < _vertices.size(); ++i) {
 
-            vectors.add(new Point3D(ray.get_POO()).subtract(new Point3D(_vertices.get(i))));
-            /*try {
-                temp = new Vector(ray.get_POO()).subtract(new Vector(_vertices.get(i)));
-            }
-            catch (IllegalArgumentException ex){return null; }
-            vectors.add(temp);*/
+            vectors.add(ray.get_POO().subtract(_vertices.get(i)));
         }
 
         List<Vector> normals = new ArrayList<>();
