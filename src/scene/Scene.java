@@ -20,7 +20,10 @@ public class Scene {
     private Camera _camera;
     private double _distance;
     private List<LightSource> _lights;
-
+    /**
+     * The number of rays that emerge when there is reflection and transparency
+     */
+    private int NumRaysForRef = 0;
 
     /**
      * Constructor. initialize the geometries to empty array list
