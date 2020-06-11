@@ -1,6 +1,11 @@
 package primitives;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+
+
 
 /**
  * presenting a ray
@@ -60,8 +65,46 @@ public class Ray {
         return _direction;
     }
 
+    /**
+     * Gets a double and returns the point added with the direction scaled with the given double
+     * @param t
+     * @return
+     */
     public Point3D getPoint(double t){
        return _POO.add(_direction.scale(t));
+    }
+
+    /**
+     * Gets the num of rays and the area's degrees where all the rays will be
+     * @param NumOfRays num of additional rays
+     * @param Degree of the area for all the rays
+     * @param HitPoint of the ray to the area
+     * @return original ray among with the additional rays
+     */
+    public List<Ray> raySplitter(int NumOfRays, double Degree, Point3D HitPoint){
+        double radius = Math.tan(Degree);
+
+        Vector firstNormal = null;
+        Vector secondNormal = null;
+        if(_direction._head._x._coord == 0 && _direction._head._y._coord == 0)
+            firstNormal = new Vector(1,0,0);
+        else
+            firstNormal = new Vector(-(_direction._head._y._coord),_direction._head._x._coord,0);
+
+        secondNormal = _direction.crossProduct(firstNormal);
+
+        List<Ray> splittedRays = new ArrayList<>();
+        Point3D topPoint = null;
+        Random random = new Random();
+        double firstRandom=0;
+        double secondRandom=0;
+        for(int i=0;i<NumOfRays;i++) {
+            firstRandom = radius * random.nextDouble();
+            secondRandom = radius * random.nextDouble();
+            topPoint = HitPoint.add(firstNormal.scale(firstRandom)).add(secondNormal.scale(secondRandom));
+            splittedRays.add(new Ray(_POO, _POO.subtract(topPoint)));
+        }
+        return splittedRays;
     }
 
     @Override

@@ -14,18 +14,21 @@ import static primitives.Util.alignZero;
 
 /**
  * Present image renderer
- * @author Ofir Shmueli, Yehuda Kahan
  */
 public class Render {
 
     private ImageWriter _imageWriter;
     private Scene _scene;
-
+     //The number of additional rays that emerge when there is reflection and transparency
+     private int _NumOfRays;
+     //The number of degrees from reflection's or transparency's main ray that the new rays will create
+     private double _Degrees;
 
     // Number of recursive calls
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     // The constant k that decide who match the transparency and the reflection are will affect
     private static final double MIN_CALC_COLOR_K = 0.001;
+
 
 
     /**
@@ -38,6 +41,18 @@ public class Render {
         _imageWriter = imageWriter;
         _scene = scene;
     }
+
+    public Render(ImageWriter imageWriter, Scene scene, int NumOfRays, double Degrees){
+        if(NumOfRays<0 || Degrees <0)
+            throw new IllegalArgumentException("The num of rays and the num of degrees must be bigger/equal to zero");
+        if(NumOfRays == 0 && Degrees > 0)
+            throw new IllegalArgumentException("When the number of rays equals zero, the degree must be zero as well");
+        _NumOfRays = NumOfRays;
+        _Degrees = Degrees;
+        _imageWriter = imageWriter;
+        _scene = scene;
+    }
+
 
     /**
      * Takes the scene and the image writer and makes the photo with them

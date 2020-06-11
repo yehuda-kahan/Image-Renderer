@@ -8,6 +8,8 @@ import primitives.*;
 import renderer.*;
 import scene.Scene;
 
+import java.util.Random;
+
 /**
  * Testing basic shadows
  * 
