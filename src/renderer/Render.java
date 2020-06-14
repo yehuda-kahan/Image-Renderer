@@ -166,9 +166,16 @@ public class Render {
         if (kkt > MIN_CALC_COLOR_K) {
             Ray refractedRay = constructRefractedRay(n,point._point, inRay) ;
             GeoPoint refractedPoint = findClosestIntersection(refractedRay);
-            if (refractedPoint != null)
-                color = color.add(calcColor(refractedPoint, refractedRay,
-                        level - 1, kkt).scale(kt));
+            if (refractedPoint != null) {
+                List<Ray> rays = refractedRay.raySplitter(_NumOfRays,_Degrees , refractedPoint._point);
+                for(Ray ray : rays) {
+                    GeoPoint hitPoint = findClosestIntersection(ray);
+                    if(hitPoint != null) {
+                        color = color.add(calcColor(hitPoint, ray,
+                                level - 1, kkr).scale(kr).reduce(_NumOfRays + 1));
+                    }
+                }
+            }
         }
         return color;
     }
