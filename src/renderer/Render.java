@@ -40,6 +40,8 @@ public class Render {
 
         _imageWriter = imageWriter;
         _scene = scene;
+        _Degrees = 0;
+        _NumOfRays = 0;
     }
 
     public Render(ImageWriter imageWriter, Scene scene, int NumOfRays, double Degrees){
@@ -148,9 +150,17 @@ public class Render {
         if (kkr > MIN_CALC_COLOR_K) {
             Ray reflectedRay = constructReflectedRay(n, point._point, inRay);
             GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
-            if (reflectedPoint != null)
-                color = color.add(calcColor(reflectedPoint, reflectedRay,
-                        level - 1, kkr).scale(kr));
+            if (reflectedPoint != null) {
+
+                List<Ray> rays = reflectedRay.raySplitter(_NumOfRays,_Degrees , reflectedPoint._point);
+                for (Ray ray : rays) {
+                    GeoPoint hitPoint = findClosestIntersection(ray);
+                    if (hitPoint != null) {
+                        color = color.add(calcColor(hitPoint, ray,
+                                level - 1, kkr).scale(kr).reduce(_NumOfRays + 1));
+                    }
+                }
+            }
         }
         double kt = point._geometry.getMaterial().getKT(), kkt = k * kt;
         if (kkt > MIN_CALC_COLOR_K) {

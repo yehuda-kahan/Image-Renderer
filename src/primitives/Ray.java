@@ -82,6 +82,9 @@ public class Ray {
      * @return original ray among with the additional rays
      */
     public List<Ray> raySplitter(int NumOfRays, double Degree, Point3D HitPoint){
+
+        if (NumOfRays == 0) return List.of(this);
+
         double radius = Math.tan(Degree);
 
         Vector firstNormal = null;
@@ -104,6 +107,7 @@ public class Ray {
             topPoint = HitPoint.add(firstNormal.scale(firstRandom)).add(secondNormal.scale(secondRandom));
             splittedRays.add(new Ray(_POO, _POO.subtract(topPoint)));
         }
+        splittedRays.add(this);
         return splittedRays;
     }
 
