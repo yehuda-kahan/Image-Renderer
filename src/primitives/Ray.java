@@ -1,10 +1,9 @@
 package primitives;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
+import static primitives.Util.alignZero;
+import static primitives.Util.getRandomNumber;
 
 
 /**
@@ -13,11 +12,12 @@ import java.util.Random;
  */
 public class Ray {
 
-    final Point3D _POO;
+    final Point3D _P00;
     final Vector _direction;
 
     // Constant for moving the ray
     private static final double DELTA = 0.1;
+    private Vector firstNormal;
 
     /**
      * constructor that gets a point and a vector and sets to local fields
@@ -25,7 +25,7 @@ public class Ray {
      * @param vector
      */
     public Ray(Point3D point, Vector vector){
-        _POO = new Point3D(point);
+        _P00 = new Point3D(point);
         _direction = new Vector(vector).normalize();
     }
 
@@ -39,7 +39,7 @@ public class Ray {
      */
     public Ray(Point3D head, Vector direction, Vector normal){
         Vector delta = normal.scale(normal.dotProduct(direction) > 0 ? DELTA : - DELTA);
-        _POO = head.add(delta);
+        _P00 = head.add(delta);
         _direction = direction;
     }
 
@@ -47,7 +47,7 @@ public class Ray {
      * copy constructor
      */
     public Ray(Ray other){
-        _POO=new Point3D(other._POO);
+        _P00=new Point3D(other._P00);
         _direction = new Vector(other._direction);
     }
 
@@ -55,7 +55,7 @@ public class Ray {
      * getter
      * @return _POO
      */
-    public Point3D get_POO() { return _POO;}
+    public Point3D getP00() { return _P00;}
 
     /**
      * getter
@@ -71,41 +71,50 @@ public class Ray {
      * @return
      */
     public Point3D getPoint(double t){
-       return _POO.add(_direction.scale(t));
+       return _P00.add(_direction.scale(t));
     }
 
     /**
      * Gets the num of rays and the area's degrees where all the rays will be
      * @param NumOfRays num of additional rays
      * @param Degree of the area for all the rays
-     * @param HitPoint of the ray to the area
+     * @param distance of the ray to the area
      * @return original ray among with the additional rays
      */
-    public List<Ray> raySplitter(int NumOfRays, double Degree, Point3D HitPoint){
+    public List<Ray> raySplitter(Vector normal,int NumOfRays, double Degree , double distance){
 
         if (NumOfRays == 0) return List.of(this);
 
-        double radius = Math.tan(Degree);
+        double nv = alignZero(normal.dotProduct(_direction));
 
-        Vector firstNormal = null;
-        Vector secondNormal = null;
-        if(_direction._head._x._coord == 0 && _direction._head._y._coord == 0)
-            firstNormal = new Vector(1,0,0);
-        else
-            firstNormal = new Vector(-(_direction._head._y._coord),_direction._head._x._coord,0);
+        double radius = Math.tan(Degree / 360d * 2 * Math.PI );
 
-        secondNormal = _direction.crossProduct(firstNormal);
+        Vector firstNormal = _direction.createNormal();
+        Vector secondNormal = firstNormal.crossProduct(_direction);
 
-        List<Ray> splittedRays = new ArrayList<>();
-        Point3D topPoint = null;
+        List<Ray> splittedRays = new LinkedList<>();
+        Point3D centerCirclePoint = this.getPoint(distance);
+        Point3D randomCirclePoint = null;
         Random random = new Random();
-        double firstRandom=0;
-        double secondRandom=0;
+        double x=0;
+        double y=0;
+        double r = 0;
+        double nr;
         for(int i=0;i<NumOfRays;i++) {
-            firstRandom = radius * random.nextDouble();
-            secondRandom = radius * random.nextDouble();
-            topPoint = HitPoint.add(firstNormal.scale(firstRandom)).add(secondNormal.scale(secondRandom));
-            splittedRays.add(new Ray(_POO, _POO.subtract(topPoint)));
+            randomCirclePoint = centerCirclePoint;
+            x = getRandomNumber(-1,1);
+            y = Math.sqrt(1 - x * x);
+            r = getRandomNumber(-radius,radius);
+            x = alignZero( x * r);
+            y = alignZero( y * r);
+            if (x != 0)
+                randomCirclePoint = randomCirclePoint.add(firstNormal.scale(x));
+            if (y != 0)
+                randomCirclePoint =  randomCirclePoint.add(secondNormal.scale(y));
+            Vector v = _P00.subtract(randomCirclePoint);
+            nr = normal.dotProduct(v);
+            if (nr * nv > 0)
+                splittedRays.add(new Ray(_P00, v));
         }
         splittedRays.add(this);
         return splittedRays;
@@ -113,7 +122,7 @@ public class Ray {
 
     @Override
     public String toString() {
-        return "_POO : " +  _POO.toString() +" _direction : " + _direction.toString();
+        return "_POO : " +  _P00.toString() +" _direction : " + _direction.toString();
     }
 
     @Override
@@ -121,6 +130,6 @@ public class Ray {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ray ray = (Ray) o;
-        return ray._POO.equals(_POO) && ray._direction.equals(_direction);
+        return ray._P00.equals(_P00) && ray._direction.equals(_direction);
     }
 }

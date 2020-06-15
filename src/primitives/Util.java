@@ -40,4 +40,15 @@ public abstract class Util {
     public static double alignZero(double number) {
         return getExp(number) < ACCURACY ? 0.0 : number;
     }
+
+    /**
+     * this function generating random number between [min ,max)
+     *
+     * @param min minimum
+     * @param max maximum
+     * @return random double
+     */
+    public static double getRandomNumber(double min, double max) {
+        return Math.random() * (max - min) + min;
+    }
 }

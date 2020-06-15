@@ -17,6 +17,13 @@ import static primitives.Util.alignZero;
  */
 public class Render {
 
+    // Number of recursive calls
+    private static final int MAX_CALC_COLOR_LEVEL = 10;
+    // The constant k that decide who match the transparency and the reflection are will affect
+    private static final double MIN_CALC_COLOR_K = 0.001;
+    // The distance
+    private static final double DISTANCE = 10;
+
     private ImageWriter _imageWriter;
     private Scene _scene;
      //The number of additional rays that emerge when there is reflection and transparency
@@ -24,10 +31,7 @@ public class Render {
      //The number of degrees from reflection's or transparency's main ray that the new rays will create
      private double _Degrees;
 
-    // Number of recursive calls
-    private static final int MAX_CALC_COLOR_LEVEL = 10;
-    // The constant k that decide who match the transparency and the reflection are will affect
-    private static final double MIN_CALC_COLOR_K = 0.001;
+
 
 
 
@@ -69,14 +73,16 @@ public class Render {
         double width = _imageWriter.getWidth();
         double height = _imageWriter.getHeight();
 
-        for (int i = 0; i < nY; ++i)
-            for (int j = 0; j < nX; ++j){
-                Ray ray = camera.constructRayThroughPixel(nX,nY,j,i,distance,width,height);
+        for (int i = 0; i < nY; ++i) {
+            System.out.println(i);
+            for (int j = 0; j < nX; ++j) {
+                Ray ray = camera.constructRayThroughPixel(nX, nY, j, i, distance, width, height);
 
                 GeoPoint closestPoint = findClosestIntersection(ray);
                 _imageWriter.writePixel(j, i, closestPoint == null ? background
-                        : calcColor(closestPoint,ray).getColor());
+                        : calcColor(closestPoint, ray).getColor());
             }
+        }
     }
 
     /**
@@ -149,34 +155,38 @@ public class Render {
         double kr = point._geometry.getMaterial().getKR(), kkr = k * kr;
         if (kkr > MIN_CALC_COLOR_K) {
             Ray reflectedRay = constructReflectedRay(n, point._point, inRay);
-            GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
-            if (reflectedPoint != null) {
-
-                List<Ray> rays = reflectedRay.raySplitter(_NumOfRays,_Degrees , reflectedPoint._point);
-                for (Ray ray : rays) {
-                    GeoPoint hitPoint = findClosestIntersection(ray);
-                    if (hitPoint != null) {
-                        color = color.add(calcColor(hitPoint, ray,
-                                level - 1, kkr).scale(kr).reduce(_NumOfRays + 1));
-                    }
-                }
-            }
+            color = calcBeamColor(color,n,reflectedRay,level,kr,kkr);
         }
         double kt = point._geometry.getMaterial().getKT(), kkt = k * kt;
         if (kkt > MIN_CALC_COLOR_K) {
             Ray refractedRay = constructRefractedRay(n,point._point, inRay) ;
-            GeoPoint refractedPoint = findClosestIntersection(refractedRay);
-            if (refractedPoint != null) {
-                List<Ray> rays = refractedRay.raySplitter(_NumOfRays,_Degrees , refractedPoint._point);
-                for(Ray ray : rays) {
-                    GeoPoint hitPoint = findClosestIntersection(ray);
-                    if(hitPoint != null) {
-                        color = color.add(calcColor(hitPoint, ray,
-                                level - 1, kkr).scale(kr).reduce(_NumOfRays + 1));
-                    }
-                }
+            color = calcBeamColor(color,n,refractedRay,level,kt,kkt);
+        }
+        return color;
+    }
+
+    /**
+     * this function calculate the color of point with the help of beam
+     *
+     * @param color  the color of the intersection point
+     * @param n      The normal vector of the point where beam start
+     * @param refRay reflected/refracted ray
+     * @param level  The level of recursiun
+     * @param k      kt/kr
+     * @param kk     kkt/kkr
+     * @return The color
+     */
+    private Color calcBeamColor(Color color, Vector n, Ray refRay, int level, double k, double kk) {
+        Color addColor = Color.BLACK;
+        List<Ray> rays = refRay.raySplitter(n ,_NumOfRays, _Degrees ,DISTANCE);
+        for (Ray ray : rays) {
+            GeoPoint refPoint = findClosestIntersection(ray);
+            if (refPoint != null) {
+                addColor = addColor.add(calcColor(refPoint, ray, level - 1, kk).scale(k));
             }
         }
+        int size = rays.size();
+        color = color.add(size > 1 ? addColor.reduce(size) : addColor);
         return color;
     }
 

@@ -135,7 +135,7 @@ public class GlassCube {
 
                 ,new Sphere(new Point3D(0, 35, 50),25,new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100))
 
-                ,new Plane(new Point3D(0,-8,-2),new Vector(0,4,1),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0.8))
+                ,new Plane(new Point3D(0,-8,-2),new Vector(0,4,1),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0))
                 //,new Plane(new Point3D(0,-20/7d,-2),new Vector(0,10/7d,1),new Color(java.awt.Color.DARK_GRAY),new Material(0,0,0,0,0.8))
                 // ,new Plane(new Point3D(0,0,150),new Vector(0,-0.2,-1),new Color(java.awt.Color.DARK_GRAY),new Material(0.2,0.1,100,0,0.8))
 
@@ -151,7 +151,7 @@ public class GlassCube {
 
 
         ImageWriter imageWriter = new ImageWriter("Glass Cube with upgrade", 150, 150, 500, 500);
-        Render render = new Render(imageWriter, scene,10, 5);
+        Render render = new Render(imageWriter, scene,10, 45);
 
         render.renderImage();
         render.writeToImage();
@@ -162,7 +162,7 @@ public class GlassCube {
         Scene scene = new Scene("Testing Test");
         //scene.setCamera(new Camera(new Point3D(0, 475, -1800), new Vector(0, -1, 4), new Vector(0,4,1)));
         //scene.setCamera(new Camera(new Point3D(0, 1070, -10000/7d), new Vector(0, -1, 10/7d), new Vector(0,10/7d,1)));
-        scene.setCamera(new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
         scene.setDistance(1000);
         scene.setBackground(Color.BLACK);
         scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
@@ -170,19 +170,46 @@ public class GlassCube {
         scene.addGeometries(
                 new Sphere(new Point3D(0, 0, 30),30,new Color(java.awt.Color.BLUE)
                         , new Material(0.4, 0.3, 100, 0.3, 0)),
-                new Sphere(new Point3D(0, 0, 30),15,new Color(java.awt.Color.RED), new Material(0.5, 0.5, 100)),
-                new Plane(new Point3D(0,15,30),new Vector(0,-1,0),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0.8))
+                new Sphere(new Point3D(0, 0, 30),15,new Color(java.awt.Color.RED), new Material(0.5, 0.5, 100))
+               //,new Plane(new Point3D(0,30,30),new Vector(0,-1,0),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0.8))
                 );
 
         scene.addLights(new SpotLight(new Color(1000, 600, 0), 1,
                 0.0004, 0.0000006, new Point3D(-100, 100, -500), new Vector(-1, 1, 2)));
 
         ImageWriter imageWriter = new ImageWriter("testingTest", 150, 150, 500, 500);
-        Render render = new Render(imageWriter, scene);
+        Render render = new Render(imageWriter, scene,0,0);
 
         render.renderImage();
         render.writeToImage();
 
 
+    }
+
+    @Test
+    public void TestingTestWithUpgrade(){
+        Scene scene = new Scene("Testing Test");
+        //scene.setCamera(new Camera(new Point3D(0, 475, -1800), new Vector(0, -1, 4), new Vector(0,4,1)));
+        //scene.setCamera(new Camera(new Point3D(0, 1070, -10000/7d), new Vector(0, -1, 10/7d), new Vector(0,10/7d,1)));
+        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+        scene.setDistance(1000);
+        scene.setBackground(Color.BLACK);
+        scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
+
+        scene.addGeometries(
+                new Sphere(new Point3D(0, 0, 30),30,new Color(java.awt.Color.BLUE)
+                        , new Material(0.4, 0.3, 100,0.3, 0))
+                ,new Sphere(new Point3D(0, 0, 30),15,new Color(java.awt.Color.RED), new Material(0.5, 0.5, 100))
+                //,new Plane(new Point3D(0,30,30),new Vector(0,-1,0),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0.8))
+        );
+
+        scene.addLights(new SpotLight(new Color(1000, 600, 0), 1,
+                0.0004, 0.0000006, new Point3D(-100, 100, -500), new Vector(-1, 1, 2)));
+
+        ImageWriter imageWriter = new ImageWriter("testingTestwithUpgrade", 150, 150, 500, 500);
+        Render render = new Render(imageWriter, scene,80,45);
+
+        render.renderImage();
+        render.writeToImage();
     }
 }
