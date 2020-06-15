@@ -55,7 +55,7 @@ public class Cylinder extends Tube {
      * getter
      * @return _height
      */
-    public double get_height() {
+    public double getHeight() {
         return _height;
     }
 
@@ -69,10 +69,10 @@ public class Cylinder extends Tube {
     public Vector getNormal(Point3D point) {
 
         // create a new plane that present the bottom of the cylinder
-        Plane bottom = new Plane(_axisRay.get_POO(),_axisRay.get_direction());
+        Plane bottom = new Plane(_axisRay.getP00(),_axisRay.get_direction());
 
         // create a new plane that present the top of the cylinder
-        Point3D P00Top = _axisRay.get_POO().add(_axisRay.get_direction().scale(_height));
+        Point3D P00Top = _axisRay.getP00().add(_axisRay.get_direction().scale(_height));
         Plane top = new Plane(P00Top, new Vector(_axisRay.get_direction().scale(-1)));
 
         if (top.IsOnThePlane(point))

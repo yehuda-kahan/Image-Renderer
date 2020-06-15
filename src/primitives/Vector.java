@@ -169,7 +169,7 @@ public class Vector {
      */
     public Vector createNormal() {
         int min = 1;
-        double x = _head.get_x().getCoord(), y = _head.get_y().getCoord(), z = _head.get_z().getCoord();
+        double x = _head.getX().getCoord(), y = _head.getY().getCoord(), z = _head.getZ().getCoord();
         double minCoor = x > 0 ? x : -x;
         if (Math.abs(y) < minCoor) {
             minCoor = y > 0 ? y : -y;

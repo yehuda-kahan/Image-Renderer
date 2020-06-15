@@ -53,7 +53,7 @@ public class Polygon extends Geometry {
 
         if (vertices.length == 3) return; // no need for more tests for a Triangle
 
-        Vector n = _plane.get_normal();
+        Vector n = _plane.getNormal();
 
         // Subtracting any subsequent points will throw an IllegalArgumentException
         // because of Zero Vector if they are in the same point
@@ -142,7 +142,7 @@ public class Polygon extends Geometry {
 
     @Override
     public Vector getNormal(Point3D point) {
-        return _plane.get_normal();
+        return _plane.getNormal();
     }
 
     @Override
@@ -155,7 +155,7 @@ public class Polygon extends Geometry {
         List<Vector> vectors = new ArrayList<>();
         for (int i = 0; i < _vertices.size(); ++i) {
 
-            vectors.add(ray.get_POO().subtract(_vertices.get(i)));
+            vectors.add(ray.getP00().subtract(_vertices.get(i)));
         }
 
         List<Vector> normals = new ArrayList<>();

@@ -71,7 +71,7 @@ public class Camera {
      * getter
      * @return _po
      */
-    public Point3D get_p0() {
+    public Point3D getP0() {
         return _p0;
     }
 
@@ -79,7 +79,7 @@ public class Camera {
      * getter
      * @return _vUp
      */
-    public Vector get_vUp() {
+    public Vector getVUp() {
         return _vUp;
     }
 
@@ -87,7 +87,7 @@ public class Camera {
      * getter
      * @return _vRight
      */
-    public Vector get_vRight() {
+    public Vector getVRight() {
         return _vRight;
     }
 
@@ -95,7 +95,7 @@ public class Camera {
      * getter
      * @return _vTo
      */
-    public Vector get_vTo() {
+    public Vector getVTo() {
         return _vTo;
     }
 }

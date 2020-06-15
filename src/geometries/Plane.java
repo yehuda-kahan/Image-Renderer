@@ -88,7 +88,7 @@ public class Plane extends Geometry {
      * getter
      * @return _p
      */
-    public Point3D get_p() {
+    public Point3D getP() {
         return _p;
     }
 
@@ -96,7 +96,7 @@ public class Plane extends Geometry {
      * getter
      * @return _normal
      */
-    public Vector get_normal() {
+    public Vector getNormal() {
         return _normal;
     }
 
@@ -129,7 +129,7 @@ public class Plane extends Geometry {
     @Override
     public List<GeoPoint> findIntersections(Ray ray) {
 
-        if (ray.get_POO().equals(_p)) // Ray start at the point that present the plane
+        if (ray.getP00().equals(_p)) // Ray start at the point that present the plane
             return null;
 
         double nv = ray.get_direction().dotProduct(_normal);
@@ -137,7 +137,7 @@ public class Plane extends Geometry {
         if (isZero(nv)) // Ray is parallel to the plane
             return null;
 
-        double nQMinusP0 = _normal.dotProduct(ray.get_POO().subtract(_p));
+        double nQMinusP0 = _normal.dotProduct(ray.getP00().subtract(_p));
         double t = alignZero(nQMinusP0/nv);
 
         if (t > 0) {

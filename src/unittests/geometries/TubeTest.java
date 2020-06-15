@@ -53,7 +53,7 @@ public class TubeTest {
         p1 = new GeoPoint(tube , new Point3D(0,0,0.5));
         Point3D p2 = new Point3D(2,0,0.5);
         List<GeoPoint> result = tube.findIntersections(new Ray(new Point3D(-1,0,0.5),new Vector(1,0,0)));
-        if (result.get(0)._point.get_x().getCoord() > 0)
+        if (result.get(0)._point.getX().getCoord() > 0)
             result = List.of(result.get(1),result.get(0));
         assertEquals("Ray cross the tube and intersect him Twice", List.of(p1,p2)
                 ,result);

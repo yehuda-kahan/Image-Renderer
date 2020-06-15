@@ -72,12 +72,12 @@ public class Sphere extends RadialGeometry {
     public List<GeoPoint> findIntersections(Ray ray) {
 
         // Ray start at the center of the sphere
-        if(ray.get_POO().equals(_center))
+        if(ray.getP00().equals(_center))
         {
             GeoPoint geoPoint = new GeoPoint(this,new Point3D(ray.getPoint(_radius)));
             return List.of(geoPoint);
         }
-        Vector u = ray.get_POO().subtract(_center);
+        Vector u = ray.getP00().subtract(_center);
         double tm = alignZero(u.dotProduct(ray.get_direction()));
         double d = alignZero(Math.sqrt(u.lengthSquared()-(tm*tm)));
         if(d>=_radius)

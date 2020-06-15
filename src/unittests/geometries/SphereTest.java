@@ -45,7 +45,7 @@ public class SphereTest {
         List<GeoPoint> result = sphere.findIntersections(new Ray(new Point3D(-1, 0, 0),
                 new Vector(3, 1, 0)));
         assertEquals("Wrong number of points", 2, result.size());
-        if (result.get(0)._point.get_x().getCoord() > result.get(1)._point.get_x().getCoord())
+        if (result.get(0)._point.getX().getCoord() > result.get(1)._point.getX().getCoord())
             result = List.of(result.get(1), result.get(0));
         assertEquals("Ray crosses sphere", List.of(p1, p2), result);
 
@@ -77,7 +77,7 @@ public class SphereTest {
         result = sphere.findIntersections(new Ray(new Point3D(-1, 0, 0),
                 new Vector(1, 0, 0)));
         assertEquals("Wrong number of points", 2, result.size());
-        if (result.get(0)._point.get_x().getCoord() > result.get(1)._point.get_x().getCoord())
+        if (result.get(0)._point.getX().getCoord() > result.get(1)._point.getX().getCoord())
             result = List.of(result.get(1), result.get(0));
         assertEquals("Ray crosses sphere (in the center)", List.of(p1, p2), result);
 

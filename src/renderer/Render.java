@@ -105,7 +105,7 @@ public class Render {
      */
     private GeoPoint getClosestPoint(List<GeoPoint> points){
         double distance = Double.MAX_VALUE;
-        Point3D P0 = _scene.getCamera().get_p0();
+        Point3D P0 = _scene.getCamera().getP0();
         GeoPoint minDistancePoint = null;
 
         for (GeoPoint point: points)
@@ -129,7 +129,7 @@ public class Render {
 
         Color color = point._geometry.getEmmission();
 
-        Vector v = _scene.getCamera().get_p0().subtract(point._point).normalize();
+        Vector v = _scene.getCamera().getP0().subtract(point._point).normalize();
         Vector n = point._geometry.getNormal(point._point);
         Material material = point._geometry.getMaterial();
         int nShininess = material.getNShininess();
@@ -290,7 +290,7 @@ public class Render {
         if (intersectionPoints == null) return null;
 
         double distance = Double.MAX_VALUE;
-        Point3D P0 = ray.get_POO();
+        Point3D P0 = ray.getP00();
         GeoPoint minDistancePoint = null;
 
         for (GeoPoint point: intersectionPoints)

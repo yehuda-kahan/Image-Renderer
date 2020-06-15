@@ -52,7 +52,7 @@ public class Tube extends RadialGeometry {
      * getter
      * @return _axisRay
      */
-    public Ray get_axisRay() {
+    public Ray getAxisRay() {
         return _axisRay;
     }
 
@@ -67,13 +67,13 @@ public class Tube extends RadialGeometry {
     public Vector getNormal(Point3D point) {
 
         Vector temp;
-        double t = _axisRay.get_direction().dotProduct(_axisRay.get_POO().subtract(point));
+        double t = _axisRay.get_direction().dotProduct(_axisRay.getP00().subtract(point));
 
         // in that case we cannot make scale action with t, and the normal will be -> p-POO
         if (t == 0)
-            return new Vector(_axisRay.get_POO().subtract(point)).normalize();
+            return new Vector(_axisRay.getP00().subtract(point)).normalize();
 
-        Point3D O = _axisRay.get_POO().add(_axisRay.get_direction().scale(t));
+        Point3D O = _axisRay.getP00().add(_axisRay.get_direction().scale(t));
         return new Vector(O.subtract(point)).normalize();
     }
 
