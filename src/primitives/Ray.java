@@ -78,7 +78,6 @@ public class Ray {
      * Gets the num of rays and the area's degrees where all the rays will be
      * @param NumOfRays num of additional rays
      * @param Degree of the area for all the rays
-     * @param distance of the ray to the area
      * @return original ray among with the additional rays
      */
     public List<Ray> raySplitter(Vector normal,int NumOfRays, double Degree , double distance){
@@ -90,9 +89,10 @@ public class Ray {
         double radius = Math.tan(Degree / 360d * 2 * Math.PI );
 
         Vector firstNormal = _direction.createNormal();
-        Vector secondNormal = firstNormal.crossProduct(_direction);
+        Vector secondNormal = firstNormal.crossProduct(_direction).normalize();
 
         List<Ray> splittedRays = new LinkedList<>();
+
         Point3D centerCirclePoint = this.getPoint(distance);
         Point3D randomCirclePoint = null;
         Random random = new Random();

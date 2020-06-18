@@ -54,7 +54,7 @@ public class GlassCube {
 
 
         ImageWriter imageWriter = new ImageWriter("GlassCube", 150, 150, 500, 500);
-        Render render = new Render(imageWriter, scene);
+        Render render = new Render(imageWriter, scene).setMultithreading(3).setDebugPrint();
 
         render.renderImage();
         render.writeToImage();
@@ -135,7 +135,7 @@ public class GlassCube {
 
                 ,new Sphere(new Point3D(0, 35, 50),25,new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100))
 
-                ,new Plane(new Point3D(0,-8,-2),new Vector(0,4,1),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0))
+                ,new Plane(new Point3D(0,-8,-2),new Vector(0,4,1),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0.8))
                 //,new Plane(new Point3D(0,-20/7d,-2),new Vector(0,10/7d,1),new Color(java.awt.Color.DARK_GRAY),new Material(0,0,0,0,0.8))
                 // ,new Plane(new Point3D(0,0,150),new Vector(0,-0.2,-1),new Color(java.awt.Color.DARK_GRAY),new Material(0.2,0.1,100,0,0.8))
 
@@ -151,7 +151,7 @@ public class GlassCube {
 
 
         ImageWriter imageWriter = new ImageWriter("Glass Cube with upgrade", 150, 150, 500, 500);
-        Render render = new Render(imageWriter, scene,10, 45);
+        Render render = new Render(imageWriter, scene,50, 5).setMultithreading(3).setDebugPrint();
 
         render.renderImage();
         render.writeToImage();
@@ -207,7 +207,7 @@ public class GlassCube {
                 0.0004, 0.0000006, new Point3D(-100, 100, -500), new Vector(-1, 1, 2)));
 
         ImageWriter imageWriter = new ImageWriter("testingTestwithUpgrade", 150, 150, 500, 500);
-        Render render = new Render(imageWriter, scene,80,45);
+        Render render = new Render(imageWriter, scene,80,5).setMultithreading(3).setDebugPrint();
 
         render.renderImage();
         render.writeToImage();
