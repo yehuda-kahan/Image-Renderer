@@ -46,6 +46,7 @@ public class Polygon extends Geometry {
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
         _vertices = List.of(vertices);
+        createBox();
         // Generate the plane according to the first three vertices and associate the
         // polygon with this plane.
         // The plane holds the invariant normal (orthogonal unit) vector to the polygon
@@ -166,7 +167,7 @@ public class Polygon extends Geometry {
 
         int plus = 0, minus = 0;
         for (int i = 0; i < _vertices.size(); ++i){
-            double t = alignZero(normals.get(i).dotProduct(ray.get_direction()));
+            double t = alignZero(normals.get(i).dotProduct(ray.getDirection()));
             if (isZero(t))
                 return null;
             if(t > 0)
@@ -177,5 +178,24 @@ public class Polygon extends Geometry {
         if (plus != _vertices.size() && minus != _vertices.size())
             return null;
         return _plane.findIntersections(ray);
+    }
+
+    @Override
+    void createBox() {
+        double x;
+        double y;
+        double z;
+        for (Point3D p : _vertices){
+            x = p.getX().getCoord();
+            y = p.getY().getCoord();
+            z = p.getZ().getCoord();
+
+            _minX = x < _minX ? x : _minX;
+            _maxX = x > _maxX ? x : _maxX;
+            _minY = y < _minY ? y : _minY;
+            _maxY = y > _maxY ? y : _maxY;
+            _minZ = z < _minZ ? z : _minZ;
+            _maxZ = z > _maxZ ? z : _maxZ;
+        }
     }
 }

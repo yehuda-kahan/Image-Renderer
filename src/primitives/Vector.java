@@ -45,7 +45,7 @@ public class Vector {
           if(point.equals(Point3D.ZERO)){
               throw new IllegalArgumentException("The vector cannot be the Zero vector");
                  }
-        _head = new Point3D(point);
+        _head = point;
     }
 
     /**
@@ -53,15 +53,14 @@ public class Vector {
      * @param other vector
      */
     public Vector(Vector other){
-        _head = new Point3D(other._head);
+        _head = other._head;
     }
 
     /**
      * gets _head
      * @return _head
      */
-    public Point3D get_head() {
-
+    public Point3D getHead() {
         return _head;
     }
 

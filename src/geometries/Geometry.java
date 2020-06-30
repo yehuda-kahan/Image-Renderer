@@ -9,7 +9,7 @@ import primitives.Vector;
  * Abstract class of a geometry which includes function to get the normal
  * @author Ofir Shmueli, Yehuda Kahan
  */
-public abstract class Geometry implements Intersectable {
+public abstract class Geometry extends Intersectable {
 
     protected Color _emmission;
     protected Material _material;

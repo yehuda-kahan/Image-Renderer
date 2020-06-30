@@ -11,7 +11,7 @@ import static primitives.Util.isZero;
  * presenting a plane by a point and normal
  * @author Ofir Shmueli, Yehuda Kahan
  */
-public class Plane extends Geometry {
+public class Plane extends Geometry implements Infinite{
 
     Point3D _p;
     Vector _normal;
@@ -22,11 +22,12 @@ public class Plane extends Geometry {
      * @param vector
      */
     public Plane(Point3D point, Vector vector){
-        if (vector.get_head().equals(Point3D.ZERO)){
+        if (vector.getHead().equals(Point3D.ZERO)){
             throw new IllegalArgumentException("The vector cannot be the Zero vector");
         }
-        _p = new Point3D(point);
-        _normal = new Vector(vector).normalize();
+        _p = point;
+        _normal = vector.normalize();
+        createBox();
     }
 
     public Plane(Point3D point, Vector vector, Color color , Material material){
@@ -50,6 +51,7 @@ public class Plane extends Geometry {
         Vector v2 = new Vector(p1.subtract(p3));
         // v1 is the right vector
         _normal = v1.crossProduct(v2).normalize();
+        createBox();
     }
 
     /**
@@ -63,7 +65,7 @@ public class Plane extends Geometry {
     public Plane(Point3D p1, Point3D p2, Point3D p3 , Color color){
 
         this(p1,p2,p3);
-        _emmission = new Color(color);
+        _emmission = color;
     }
 
 
@@ -132,7 +134,7 @@ public class Plane extends Geometry {
         if (ray.getP00().equals(_p)) // Ray start at the point that present the plane
             return null;
 
-        double nv = ray.get_direction().dotProduct(_normal);
+        double nv = ray.getDirection().dotProduct(_normal);
 
         if (isZero(nv)) // Ray is parallel to the plane
             return null;
@@ -145,5 +147,10 @@ public class Plane extends Geometry {
             return List.of(geoPoint);
         }
         return null;
+    }
+
+    @Override
+    void createBox() {
+        // no need a box
     }
 }

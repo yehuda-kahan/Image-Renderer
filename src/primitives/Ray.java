@@ -25,8 +25,8 @@ public class Ray {
      * @param vector
      */
     public Ray(Point3D point, Vector vector){
-        _P00 = new Point3D(point);
-        _direction = new Vector(vector).normalize();
+        _P00 = point;
+        _direction = vector.normalize();
     }
 
     /**
@@ -47,8 +47,8 @@ public class Ray {
      * copy constructor
      */
     public Ray(Ray other){
-        _P00=new Point3D(other._P00);
-        _direction = new Vector(other._direction);
+        _P00= other._P00;
+        _direction = other._direction;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Ray {
      * getter
      * @return _direction
      */
-    public Vector get_direction() {
+    public Vector getDirection() {
         return _direction;
     }
 

@@ -75,7 +75,7 @@ public class Triangle extends Polygon {
 
         int plus = 0, minus = 0;
         for (int i = 0; i < 3; ++i){
-           double t = alignZero(normals.get(i).dotProduct(ray.get_direction()));
+           double t = alignZero(normals.get(i).dotProduct(ray.getDirection()));
            if (isZero(t))
                return null;
            if(t > 0)

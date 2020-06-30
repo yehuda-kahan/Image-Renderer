@@ -21,12 +21,12 @@ public class GeometriesTest {
         Geometries geo = new Geometries();
 
         //T1 : simple addition
-        assertEquals("simple addition", 0, geo.get_geometries().size());
+        assertEquals("simple addition", 0, geo.getGeometries().size());
         Intersectable[] geometries = new Intersectable[2];
         geometries[0] = new Plane(new Point3D(1,0,0),new Point3D(0,1,0),new Point3D(0,0,1));
         geometries[1]= new Sphere(new Point3D(1,0,0),1);
         geo.add(geometries);
-        assertEquals("simple addition", 2,geo.get_geometries().size());
+        assertEquals("simple addition", 2,geo.getGeometries().size());
 
     }
 

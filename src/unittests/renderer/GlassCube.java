@@ -15,9 +15,9 @@ public class GlassCube {
     public void GlassCube(){
 
         Scene scene = new Scene("Cube scene");
-        scene.setCamera(new Camera(new Point3D(0, 475, -1800), new Vector(0, -1, 4), new Vector(0,4,1)));
+        //scene.setCamera(new Camera(new Point3D(0, 475, -1800), new Vector(0, -1, 4), new Vector(0,4,1)));
         //scene.setCamera(new Camera(new Point3D(0, 1070, -10000/7d), new Vector(0, -1, 10/7d), new Vector(0,10/7d,1)));
-        //scene.setCamera(new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, -1, 0)));
+        scene.setCamera(new Camera(new Point3D(0, 0, -2000), new Vector(0, 0, 1), new Vector(0, 1, 0)));
         scene.setDistance(1000);
         scene.setBackground(Color.BLACK);
         scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
@@ -38,9 +38,10 @@ public class GlassCube {
 
                 ,new Sphere(new Point3D(0, 35, 50),25,new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100))
 
-               ,new Plane(new Point3D(0,-8,-2),new Vector(0,4,1),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0.8))
+               //,new Plane(new Point3D(0,-8,-2),new Vector(0,4,1),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0.8))
                 //,new Plane(new Point3D(0,-20/7d,-2),new Vector(0,10/7d,1),new Color(java.awt.Color.DARK_GRAY),new Material(0,0,0,0,0.8))
                // ,new Plane(new Point3D(0,0,150),new Vector(0,-0.2,-1),new Color(java.awt.Color.DARK_GRAY),new Material(0.2,0.1,100,0,0.8))
+                ,new Plane(new Point3D(0,-5,0),new Vector(0,1,0),new Color(java.awt.Color.DARK_GRAY),new Material(0.25,0.3,50,0,0.8))
 
                 ,new Sphere(new Point3D(-100,23,0),30,new Color(220,20,60),new Material(0.3,0.4,70,0,0.3))
 
@@ -54,8 +55,9 @@ public class GlassCube {
 
 
         ImageWriter imageWriter = new ImageWriter("GlassCube", 150, 150, 500, 500);
-        Render render = new Render(imageWriter, scene).setMultithreading(3).setDebugPrint();
+        Render render = new Render(imageWriter, scene,40,5,true).setMultithreading(3).setDebugPrint();
 
+        scene.getGeometries().buildHierarchyTree();
         render.renderImage();
         render.writeToImage();
     }
@@ -151,7 +153,9 @@ public class GlassCube {
 
 
         ImageWriter imageWriter = new ImageWriter("Glass Cube with upgrade", 150, 150, 500, 500);
-        Render render = new Render(imageWriter, scene,50, 5).setMultithreading(3).setDebugPrint();
+        Render render = new Render(imageWriter, scene,20, 5).setMultithreading(3).setDebugPrint();
+
+        scene.getGeometries().buildHierarchyTree();
 
         render.renderImage();
         render.writeToImage();

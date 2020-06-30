@@ -8,7 +8,7 @@ import java.util.List;
  * presenting a tube
  * @author Ofir Shmueli, Yehuda Kahan
  */
-public class Tube extends RadialGeometry {
+public class Tube extends RadialGeometry implements Infinite {
 
     Ray _axisRay;
 
@@ -67,13 +67,13 @@ public class Tube extends RadialGeometry {
     public Vector getNormal(Point3D point) {
 
         Vector temp;
-        double t = _axisRay.get_direction().dotProduct(_axisRay.getP00().subtract(point));
+        double t = _axisRay.getDirection().dotProduct(_axisRay.getP00().subtract(point));
 
         // in that case we cannot make scale action with t, and the normal will be -> p-POO
         if (t == 0)
             return new Vector(_axisRay.getP00().subtract(point)).normalize();
 
-        Point3D O = _axisRay.getP00().add(_axisRay.get_direction().scale(t));
+        Point3D O = _axisRay.getP00().add(_axisRay.getDirection().scale(t));
         return new Vector(O.subtract(point)).normalize();
     }
 
@@ -81,5 +81,10 @@ public class Tube extends RadialGeometry {
     @Override
     public List<GeoPoint> findIntersections(Ray ray) {
         return null;
+    }
+
+    @Override
+    void createBox() {
+       // no need a box
     }
 }
