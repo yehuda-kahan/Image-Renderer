@@ -4,7 +4,14 @@ import primitives.*;
 
 import java.util.*;
 
-//
+// Present a base class for geometry or collection of geometry.
+// The class has :
+// * fields witch present the box of each geometry
+// or geometries.
+// * abstract functions (that must be realized by any geometry or collection of geometries) :
+// 1. List<GeoPoint> findIntersection(Ray)
+// 2. void createBox()
+// - see the comments below -
 public abstract class Intersectable {
 
     // Presents the box for each geometry or geometries
@@ -16,16 +23,18 @@ public abstract class Intersectable {
     protected double _maxZ = Double.NEGATIVE_INFINITY;
 
     /**
-     * find intersections between the current geometry and the given ray
+     * find intersections between the current geometry or geometries, and the given ray
      *
      * @param ray
-     * @return The intersect of the ray with the geometry
+     * @return All the intersection points (List) of the ray with the geometry
      */
     abstract public List<GeoPoint> findIntersections(Ray ray);
 
 
     /**
      * Create box for the geometry or the geometries
+     * Initializes the box fields - _minX , _maxX etc.
+     * - must be implement by all the finite geometries -
      */
     abstract void createBox();
 

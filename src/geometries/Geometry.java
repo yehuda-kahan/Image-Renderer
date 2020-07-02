@@ -6,7 +6,10 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * Abstract class of a geometry which includes function to get the normal
+ * Abstract class of a geometry
+ * fields :   * The color of the geometry
+ *            * The Material which the geometry made of
+ * abstract function to get the normal (a vector) to the geometry
  * @author Ofir Shmueli, Yehuda Kahan
  */
 public abstract class Geometry extends Intersectable {

@@ -78,6 +78,7 @@ public class Ray {
      * Gets the num of rays and the area's degrees where all the rays will be
      * @param NumOfRays num of additional rays
      * @param Degree of the area for all the rays
+     * @param distance of the radius circle from the head of the ray
      * @return original ray among with the additional rays
      */
     public List<Ray> raySplitter(Vector normal,int NumOfRays, double Degree , double distance){

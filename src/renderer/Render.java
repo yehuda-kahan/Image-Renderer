@@ -362,7 +362,7 @@ public class Render {
             }
         }
         int size = rays.size();
-        color = color.add(size > 1 ? addColor.reduce(size) : addColor);
+        color = color.add(addColor.reduce(size));
         return color;
     }
 

@@ -269,9 +269,9 @@ public class AccelerationTests {
                 new PointLight(new Color(java.awt.Color.white), 1, 4E-5, 2E-7,new Point3D(0.001, -100, 499)));
 
         ImageWriter imageWriter = new ImageWriter("no BVH 4000Triangles with like star", 400, 400, 500, 500);
-        Render render = new Render(imageWriter, scene, 40, 5, true).setMultithreading(3).setDebugPrint();
+        Render render = new Render(imageWriter, scene, 40, 5).setMultithreading(3).setDebugPrint();
 
-        scene.getGeometries().buildHierarchyTree();
+        //scene.getGeometries().buildHierarchyTree();
 
         render.renderImage();
         render.writeToImage();
